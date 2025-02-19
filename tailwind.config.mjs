@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        grotesque: ["var(--font-grotesque)", "sans-serif"], // Use CSS variable
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
