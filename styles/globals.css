@@ -76,3 +76,109 @@ body{
   top: -6px;
   display: inline-block;
 }
+.btn-b {
+  border: 1px solid #fff;
+  padding: 8px 40px;
+  border-radius: 30px;
+}
+.btn-b .arrow-l {
+  transform: rotate(180deg);
+}
+.met-wrap {
+  margin-top: -27%;
+  padding: 0 20px;
+}
+.lbox {
+  width: 47%;
+  height: 30px;
+  background: #FFA100;
+  position: absolute;
+  right: 0;
+  left: 0;
+  margin: auto;
+  transform: skewX(-0.06turn);
+  top: 0;
+}
+
+.mwarp {
+  display: flex
+;
+  gap: 20px;
+  overflow: hidden;
+  padding: 20px 0;
+}
+.mimg {
+  flex-shrink: 0;
+  transform: rotate(-4deg);
+}
+.mimg img {
+  border-radius: 10px;
+}
+.news {
+  border: 2px solid #000;
+}
+.newsl
+{
+  border-right: 1px solid #000;
+}
+.new-input {
+  border-bottom: 1px solid #000;
+}
+.ft-btm 
+{
+  margin-top: 10%;
+}
+.ft-lin>li
+{
+  margin-bottom: 10px;
+}
+.ft-lin>li>a{
+  font-size: 18px;
+  text-transform: capitalize;
+  font-weight: 600;
+}
+.footer-sec{
+  position: relative;
+  z-index: 1;
+  overflow: hidden;
+}
+.ft-shape {
+  position: absolute;
+  z-index: -1;
+  top: -13px;
+  left: 0;
+}
+.maquee-wrap {
+  display: flex
+;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 100%;
+  position: relative;
+}
+.marquee-inner {
+	display: flex;
+	width: max-content;
+	min-width: 100%;
+}
+
+.mrq {
+  flex-shrink: 0;
+  white-space: nowrap;
+  padding: 0 1vw;
+  display: flex;
+  gap: 27px;
+  align-items: baseline;
+}
+img.arrow
+{
+	width: 85px;
+}
+.mrq h1 {
+	text-align: center;
+	font-size: 120px;
+  font-weight: 600;
+	line-height: 4.4vw;
+	color: #18181A;
+	text-transform: uppercase;
+}
