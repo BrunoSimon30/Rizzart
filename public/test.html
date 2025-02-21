@@ -1,0 +1,858 @@
+import Head from "next/head";
+import Image from "react-bootstrap/Image";
+import React, { useRef, useState } from "react";
+import { Col, Container, Row } from "react-bootstrap";
+import TestimonialSlider from "@/components/Sliders/TestimonialSlider";
+import Link from "next/link";
+import useIsomorphicLayoutEffect from "@/hooks/useIsomorphicLayoutEffect";
+import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
+import MagnetButton from "@/components/MagnetButton";
+import HeroScene from "@/components/Home/HeroSection";
+// import ReactPlayer from "react-player";
+import dynamic from "next/dynamic";
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
+
+export default function Home() {
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    autoplay: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
+  const main = useRef<HTMLElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  useIsomorphicLayoutEffect(() => {
+    if (!main.current) return;
+
+    const ctx = gsap.context((self: any) => {
+      setTimeout(() => {
+        let heroBig = new SplitText(".hero-big", {
+          type: "words,lines",
+          // wordDelimiter: "<br/>",
+          linesClass: "overflow-hidden",
+        });
+        let heroPara = new SplitText(".hero-para", {
+          type: "words,lines",
+          wordDelimiter: "<br/>",
+          linesClass: "overflow-hidden",
+        });
+
+        let heroTL = gsap.timeline({
+          onComplete: () => {
+            gsap.to(".loading_screen", { display: "none" });
+          },
+        });
+        heroTL
+          .fromTo(
+            heroBig.words,
+            {
+              y: "100%",
+            },
+            {
+              y: "0%",
+              stagger: 0.2,
+              duration: 1.5,
+              ease: "power2.inOut",
+            },
+            0
+          )
+          .fromTo(
+            heroPara.words,
+            {
+              y: "100%",
+            },
+            {
+              y: "0%",
+              stagger: 0.3,
+              duration: 1.5,
+              ease: "power2.inOut",
+            },
+            0
+          );
+
+        let bigHeadings = main.current?.querySelectorAll(
+          ".heading:not(.hero-big)"
+        );
+        if (bigHeadings !== undefined && bigHeadings?.length !== 0) {
+          bigHeadings.forEach((element) => {
+            let split = new SplitText(element, {
+              type: "words,lines",
+              wordsDelimiter: "<br/>",
+              linesClass: "overflow-hidden",
+            });
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: element,
+                scroller: window.document.querySelector(".main_wrapper"),
+              },
+            });
+            tl.fromTo(
+              split.words,
+              {
+                y: "110%",
+              },
+              {
+                y: "0%",
+                stagger: 0.1,
+                ease: "power2.inOut",
+                duration: "1.5",
+              }
+            );
+          });
+        }
+
+        let mHeadings = main.current?.querySelectorAll(".mheading");
+        if (mHeadings !== undefined && mHeadings.length !== 0) {
+          mHeadings.forEach((element) => {
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: element,
+                scroller: document.querySelector(".scroller"),
+              },
+            });
+            let split = new SplitText(element, {
+              type: "lines,words",
+              wordsDelimiter: "<br/>",
+              linesClass: "overflow-hidden",
+            });
+            tl.fromTo(
+              split.words,
+              {
+                y: "100%",
+              },
+              {
+                y: "0%",
+                duration: 1.5,
+                ease: "power2.inOut",
+                stagger: 0.1,
+              }
+            );
+          });
+        }
+
+        let paras = main.current?.querySelectorAll("p.para:not(.hero-para)");
+        if (paras !== undefined && paras.length !== 0) {
+          paras.forEach((element) => {
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: element,
+                scroller: document.querySelector(".scroller"),
+              },
+            });
+            let split = new SplitText(element, {
+              type: "words",
+              linesClass: "overflow-hidden",
+            });
+            tl.fromTo(
+              split.words,
+              {
+                y: "100%",
+                opacity: 0,
+              },
+              {
+                opacity: 1,
+                y: "0%",
+                stagger: 0.03,
+                duration: 1,
+              }
+            );
+          });
+        }
+
+        // RECOGNIZE
+        let recognizeSect = main.current?.querySelector("section.recognize");
+        let counterItems = recognizeSect?.querySelectorAll(
+          ".count .inner .number h4 >span"
+        );
+        if (counterItems !== undefined && counterItems.length !== 0) {
+          counterItems.forEach((element) => {
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: element,
+                scroller: document.querySelector(".scroller"),
+              },
+            });
+            tl.from(element, {
+              textContent: 0,
+              duration: 4,
+              ease: "Power1.easeIn",
+              snap: { textContent: 1 },
+            });
+          });
+        }
+
+        let vidItem = main.current?.querySelector(
+          ".recognize .video video"
+        ) as HTMLElement;
+        let vidTl = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: vidItem,
+              scroller: window.document.querySelector(".scroller"),
+              scrub: 1,
+              end: "-=50",
+            },
+          })
+          .fromTo(
+            vidItem,
+            {
+              width: "550px",
+              borderRadius: "100%",
+            },
+            {
+              width: "100%",
+              borderRadius: "30px",
+            },
+            0
+          );
+
+        // SERVICES SECTION
+        let sideImages = main.current?.querySelectorAll(
+          ".services_ >img.img-fluid"
+        );
+        if (sideImages !== undefined && sideImages.length !== 0) {
+          sideImages.forEach((element) => {
+            let tl = gsap.timeline({
+              scrollTrigger: {
+                trigger: element,
+                scroller: document.querySelector(".scroller"),
+                scrub: 1,
+                end: "-=10%",
+              },
+            });
+            tl.fromTo(
+              element,
+              {
+                y: "25%",
+              },
+              {
+                y: "0%",
+              }
+            );
+          });
+        }
+
+        let servItemsTL = gsap.timeline({
+          scrollTrigger: {
+            trigger: ".ser-box",
+            scroller: document.querySelector(".scroller"),
+            scrub: 1,
+          },
+        });
+        servItemsTL.fromTo(
+          ".ser-box",
+          {
+            y: "15%",
+          },
+          {
+            y: "0%",
+            stagger: 0.2,
+          }
+        );
+
+        //MEET SECTION
+        let processTL = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "section.meet",
+              scroller: document.querySelector(".scroller"),
+              pin: true,
+              scrub: true,
+              end: "+=4000",
+            },
+          })
+          .fromTo(
+            ".meet .meetwrap .colmid .inner",
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colmid .lineloop .path_1",
+            {
+              opacity: 0,
+              strokeDasharray: 50,
+            },
+            {
+              opacity: 1,
+              strokeDasharray: 10,
+              animation: "dash 5s linear infinite",
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colbox .box.one",
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colmid .lineloop .path_2",
+            {
+              opacity: 0,
+              strokeDasharray: 50,
+            },
+            {
+              opacity: 1,
+              strokeDasharray: 10,
+              animation: "dash 5s linear infinite",
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colbox .box.two",
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colmid .lineloop .path_3",
+            {
+              opacity: 0,
+              strokeDasharray: 50,
+            },
+            {
+              opacity: 1,
+              strokeDasharray: 10,
+              animation: "dash 5s linear infinite",
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colbox .box.three",
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colmid .lineloop .path_4",
+            {
+              opacity: 0,
+              strokeDasharray: 50,
+            },
+            {
+              opacity: 1,
+              strokeDasharray: 10,
+              animation: "dash 5s linear infinite",
+              duration: 0.5,
+            }
+          )
+          .fromTo(
+            ".meet .meetwrap .colbox .box.four",
+            {
+              opacity: 0,
+            },
+            {
+              opacity: 1,
+              duration: 0.5,
+            }
+          );
+
+        //About_App
+        let aboutTl = gsap
+          .timeline({
+            scrollTrigger: {
+              trigger: "section.about_",
+              scroller: document.querySelector(".scroller"),
+              scrub: true,
+              end: "-10%",
+            },
+          })
+          .fromTo(
+            "section.about_ .mobduo",
+            {
+              scale: 1.5,
+              opacity: 0.0,
+            },
+            {
+              scale: 1,
+              opacity: 1,
+              duration: 1,
+              ease: "power2.inOut",
+            }
+          );
+      }, 50);
+    }, main);
+
+    return () => ctx.revert();
+  });
+
+  return (
+    <>
+      <Head>
+        <title>High-Quality Apps That Impress | Catch an App</title>
+        <meta name="google-site-verification" content="HX-CTMZXA_lha6_6Yhwx0tuii-6WTTrxVG9LiiEmkos" />
+      </Head>
+      <section ref={main}>
+        {/* <section className="loading_screen"></section> */}
+
+        <section className="hero-section hompage-hero-section">
+          <Container>
+            <Row>
+              <Col lg="12" className="text-start">
+                <h2 className="heading hero-big">
+                  Apps That Wow! <br /> Not Just Work!
+                </h2>
+                {/* <p className="para hero-para">
+                  At Catch an App, we understand that your business&apos;s
+                  success depends on its ability to adapt to new technologies.
+                  That&apos;s why we&apos;re committed to providing
+                  high-quality, customized mobile solutions that help you
+                  achieve your business objectives
+                </p> */}
+                <MagnetButton text="Get Your App Rolling!" href="/contact-us" />
+                {/* <ContactModal
+                  className="btn btn-black mt-3"
+                  text="Discuss A Project"
+                /> */}
+                {/* <Button variant="black" className="mt-3">Discuss A Project</Button> */}
+              </Col>
+            </Row>
+          </Container>
+          <HeroScene />
+        </section>
+
+        <section className="section-padding">
+          <Container>
+            <Row>
+              <Col lg="7" className="align-self-center">
+                <h2 className="heading lh-1">
+                  Boost Your <br />Venture  with CatchAnApp!
+                </h2>
+              </Col>
+              <Col lg="5" className="ps-lg-5">
+                <p className="para">
+                  Join us on a journey of innovation. Whether you&apos;re a seasoned business or a budding
+                  startup, we&apos;re here to turn your app ideas into reality.
+                </p>
+                <p className="para">
+                  From idea to execution, we&apos;re with you every step. We start by listening, and
+                  understanding your goals and challenges. Then, we craft a tailored roadmap for
+                  success.
+                </p>
+                <p className="para">
+                  Our team of experts develops your app with precision and passion. We believe in
+                  collaboration, keeping you informed and involved throughout.
+                </p>
+                <p className="para">
+                  With CatchAnApp, the possibilities are endless.
+                </p>
+                {/* <ContactModal
+                  className="btn btn-black mt-3"
+                  text="Discuss A Project"
+                /> */}
+                <MagnetButton text="Time to Make Ideas Happen!" href="/contact-us" />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        <section className="recognize section-padding">
+          <Container>
+            <div className="video">
+              <video
+                src="/images/video_mxv6ej.webm"
+                poster="/images/power.png"
+                autoPlay
+                muted
+                loop
+              ></video>
+              {/* <ReactPlayer
+                playsinline={true}
+                playing={isPlaying}
+                muted
+                loop
+                url={`/images/video_mxv6ej.webm`}
+              /> */}
+            </div>
+            <h2 className="heading mb-4">
+              Recognize Your <br /> Successes And Keep <br /> Working To <br />{" "}
+              Accomplish More.
+            </h2>
+            {/* <div className="count">
+              <div className="inner">
+                <div className="number">
+                  <h4>
+                    $<span>812</span>+
+                  </h4>
+                </div>
+                <h5>Money Raised</h5>
+                <p>
+                  Total amount of money raised as a result of working with Walk
+                  Studio
+                </p>
+              </div>
+              <div className="inner">
+                <div className="number">
+                  <h4>
+                    <span>400</span>+
+                  </h4>
+                </div>
+                <h5>Our Client</h5>
+                <p>
+                  Total of all clients around the world who have collaborated
+                  with us
+                </p>
+              </div>
+              <div className="inner">
+                <div className="number">
+                  <h4>
+                    $<span>12</span>+
+                  </h4>
+                </div>
+                <h5>Unicorn Award</h5>
+                <p>We have received various awards with prayers and efforts</p>
+              </div>
+              <div className="inner">
+                <div className="number">
+                  <h4>
+                    $<span>812</span>+
+                  </h4>
+                </div>
+                <h5>Money Raised</h5>
+                <p>
+                  Total amount of money raised as a result of working with Walk
+                  Studio
+                </p>
+              </div>
+            </div> */}
+          </Container>
+        </section>
+
+        <section className="section-padding position-relative services_">
+          <Image src="/images/mob2.png" className="elem1 img-fluid" alt="img" />
+          <Image src="/images/mob1.png" className="elem2 img-fluid" alt="img" />
+          <Container>
+            <div className="text-center mb-4">
+              <h2 className="mheading">
+                Revolutionize Your Business <br /> With Our Bespoke Mobile App{" "}
+                <br />
+                Development Services.
+              </h2>
+            </div>
+            <Row>
+              <Col md="6" className="mt-4">
+                <div className="ser-box">
+                  <div>
+                    <div className="flexicon">
+                      <Image
+                        src="/images/software-white.svg"
+                        className="white"
+                        alt="img"
+                      />
+                      <Image
+                        src="/images/software.svg"
+                        className="black"
+                        alt="img"
+                      />
+                      <h3 className="mb-0">
+                        Software <br /> Development
+                      </h3>
+                    </div>
+                    <p>
+                      Our software development services cater to the needs of
+                      businesses ranging from small startups to large
+                      enterprises.
+                    </p>
+                  </div>
+                  <Link
+                    href="/services/software-development"
+                    className="read-txt"
+                  >
+                    <i className="icon-arrow_arrows_back_direction_left_icon-1 round-icon"></i>
+                    <span>Learn More</span>
+                  </Link>
+                </div>
+              </Col>
+              <Col md="6" className="mt-4">
+                <div className="ser-box">
+                  <div>
+                    <div className="flexicon">
+                      <Image
+                        src="/images/app-white.svg"
+                        className="white"
+                        alt="img"
+                      />
+                      <Image
+                        src="/images/app.svg"
+                        className="black"
+                        alt="img"
+                      />
+                      <h3 className="mb-0">
+                        Mobile App <br /> Development
+                      </h3>
+                    </div>
+                    <p>
+                      We specialize in mobile app development, creating custom
+                      solutions to help businesses reach their full potential.
+                    </p>
+                  </div>
+                  <Link
+                    href="/services/mobile-app-development"
+                    className="read-txt"
+                  >
+                    <i className="icon-arrow_arrows_back_direction_left_icon-1 round-icon"></i>
+                    <span>Learn More</span>
+                  </Link>
+                </div>
+              </Col>
+              <Col md="6" className="mt-4">
+                <div className="ser-box">
+                  <div>
+                    <div className="flexicon">
+                      <Image
+                        src="/images/startup-white.svg"
+                        className="white"
+                        alt="img"
+                      />
+                      <Image
+                        src="/images/startup.svg"
+                        className="black"
+                        alt="img"
+                      />
+                      <h3 className="mb-0">
+                        Startup Product <br /> Development
+                      </h3>
+                    </div>
+                    <p>
+                      We offer startup product development services to bring
+                      your ideas to life and take your business to new heights.
+                    </p>
+                  </div>
+                  <Link
+                    href="/services/startup-product-development"
+                    className="read-txt"
+                  >
+                    <i className="icon-arrow_arrows_back_direction_left_icon-1 round-icon"></i>
+                    <span>Learn More</span>
+                  </Link>
+                </div>
+              </Col>
+              <Col md="6" className="mt-4">
+                <div className="ser-box">
+                  <div>
+                    <div className="flexicon">
+                      <Image
+                        src="/images/infrastructure-white.svg"
+                        className="white"
+                        alt="img"
+                      />
+                      <Image
+                        src="/images/infrastructure.svg"
+                        className="black"
+                        alt="img"
+                      />
+                      <h3 className="mb-0">
+                        Infrastructure <br /> & Support
+                      </h3>
+                    </div>
+                    <p>
+                      Our comprehensive infrastructure and support services
+                      ensure your digital solutions run smoothly and
+                      efficiently.
+                    </p>
+                  </div>
+                  <Link
+                    href="/services/infrastructure-and-support"
+                    className="read-txt"
+                  >
+                    <i className="icon-arrow_arrows_back_direction_left_icon-1 round-icon"></i>
+                    <span>Learn More</span>
+                  </Link>
+                </div>
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        <section className="meet section-padding bg-dark">
+          <Image src="/images/meet2.png" className="bgweb" alt="img" />
+          <Container>
+            <div className="text-center mb-lg-5 mb-3">
+              <h2 className="heading">
+                Meet, Assess, Plan, <br /> Execute, Deliver!
+              </h2>
+              <p className="para">
+                We follow a well-defined process that ensures that we deliver
+                the best possible solution to our clients.
+              </p>
+            </div>
+            <div className="meetwrap">
+              <div className="colbox">
+                <div className="box one">
+                  <h4 className="number">01</h4>
+                  <h2 className="title">Meet</h2>
+                  <p>
+                    We schedule a meeting with clients to understand their needs
+                    and requirements.
+                  </p>
+                </div>
+                <div className="box three">
+                  <h4 className="number">03</h4>
+                  <h2 className="title">Plan</h2>
+                  <p>
+                    We develop a detailed plan that includes features, design,
+                    functionality, & timeline...
+                  </p>
+                </div>
+              </div>
+              <div className="colmid">
+                <svg
+                  width="147"
+                  height="304"
+                  className="left-line lineloop"
+                  viewBox="0 0 147 304"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    className="path_1"
+                    d="M0.973633 2H35.665C52.2336 2 65.665 15.4315 65.665 32V122C65.665 138.569 79.0965 152 95.665 152H146.423"
+                    stroke="#FF9900"
+                    strokeWidth="3"
+                    strokeDasharray="10 10"
+                  />
+                  <path
+                    className="path_3"
+                    d="M0.973633 302H35.665C52.2336 302 65.665 288.569 65.665 272V182C65.665 165.431 79.0965 152 95.665 152H146.423"
+                    stroke="#FF9900"
+                    strokeWidth="3"
+                    strokeDasharray="10 10"
+                  />
+                </svg>
+                <div className="inner">
+                  <Image src="/images/meet.png" className="" alt="img" />
+                  <MagnetButton text="Lets Get Started" href="?#" />
+                  {/* <Button variant="yellow">Lets Get Started</Button> */}
+                </div>
+                <svg
+                  width="147"
+                  height="304"
+                  className="right-line lineloop "
+                  viewBox="0 0 147 304"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    className="path_2"
+                    d="M146.026 2H111.335C94.7664 2 81.335 15.4315 81.335 32V122C81.335 138.569 67.9035 152 51.335 152H0.577148"
+                    stroke="#FF9900"
+                    strokeWidth="3"
+                    strokeDasharray="10 10"
+                  />
+                  <path
+                    className="path_4"
+                    d="M146.026 302H111.335C94.7664 302 81.335 288.569 81.335 272V182C81.335 165.431 67.9035 152 51.335 152H0.577148"
+                    stroke="#FF9900"
+                    strokeWidth="3"
+                    strokeDasharray="10 10"
+                  />
+                </svg>
+              </div>
+              <div className="colbox">
+                <div className="box two">
+                  <h4 className="number">02</h4>
+                  <h2 className="title">Assess</h2>
+                  <p>
+                    We assess the market & competition to identify gaps & ensure
+                    that the app stands out.
+                  </p>
+                </div>
+                <div className="box four">
+                  <h4 className="number ">04</h4>
+                  <h2 className="title">Kick-off</h2>
+                  <p>
+                    We assign a team of experienced developers & designers, &
+                    start building the app...
+                  </p>
+                </div>
+              </div>
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-padding about_">
+          <Container>
+            <Row>
+              <Col lg="7" className="ms-auto d-lg-block d-none">
+                <div className="mobduo">
+                  <Image
+                    src="/images/fold2.png"
+                    className="img-fluid"
+                    alt="img"
+                  />
+                  <Image
+                    src="/images/fold1.png"
+                    className="img-fluid"
+                    alt="img"
+                  />
+                </div>
+              </Col>
+              <Col lg="5" className="mb-lg-0 mb-3 align-self-center">
+                <h2 className="heading">At Catch An App</h2>
+                <p className="para mb-lg-5">
+                  We are committed to delivering high-quality and user-friendly
+                  apps that meet our clients&apos; needs. Our process is
+                  designed to ensure that we deliver on our promises and exceed
+                  your expectations.
+                </p>
+                {/* <ContactModal
+                  className="btn btn-black "
+                  text="Discuss A Project"
+                /> */}
+                <MagnetButton text="Empower Your Business with an App!" href="#?" />
+              </Col>
+            </Row>
+          </Container>
+        </section>
+
+        <section className="cta-sec section-padding">
+          <Container>
+            <h2 className="heading mb-0">
+              Think We Might Be A Fit? <br /> Let&apos;s Build & Grow <br />{" "}
+              Together.
+            </h2>
+            <div className="text-lg-end">
+              <MagnetButton text="Let's Cook Up Your App!" href="/contact" />
+              {/* <ContactModal
+                className="btn btn-black mb-2"
+                text="Take a look at our work"
+              /> */}
+            </div>
+          </Container>
+        </section>
+
+        <section className="section-padding testimonial">
+          <Container>
+            <Row>
+              <Col lg="8">
+                <h2 className="heading">
+                  Our Clients <br /> Say It Best!
+                </h2>
+              </Col>
+            </Row>
+            <TestimonialSlider />
+          </Container>
+        </section>
+      </section >
+    </>
+  );
+}

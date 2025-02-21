@@ -57,9 +57,10 @@ body{
 /* home page */
 .btn-a {
   width: 280px;
-  height: 100px;
+  height: 120px;
   text-align: center;
-  display: flex;
+  display: flex
+;
   align-items: center;
   justify-content: center;
   border-radius: 60%;
@@ -67,14 +68,11 @@ body{
   font-weight: 600;
   color: #fff;
   position: relative;
-  padding-left: 19px;
-  background-color: #111;
+  background: rgba(255, 255, 255, 0.10);
 }
 .btn-a span {
-  position: absolute;
-  left: 20px;
-  top: -6px;
-  display: inline-block;
+  width: 32px;
+  margin-right: 12px;
 }
 .btn-b {
   border: 1px solid #fff;
@@ -181,4 +179,12 @@ img.arrow
 	line-height: 4.4vw;
 	color: #18181A;
 	text-transform: uppercase;
+}
+.textR
+{
+  overflow: hidden;
+  display: block;
+}
+.btn-ani{
+  overflow: hidden;
 }

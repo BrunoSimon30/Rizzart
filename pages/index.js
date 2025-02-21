@@ -1,3 +1,4 @@
+import MainBanner from "@/components/MainBanner";
 import Marquee from "@/components/marquee";
 import OurWork from "@/components/work";
 import Image from "next/image";
@@ -6,54 +7,17 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-      <section className="w-full h-screen flex items-end justify-center">
-        <div className="w-full flex  items-end  justify-between px-16 pb-16">
-          <div>
-            <h1 className="text-white text-[82px] font-[600] uppercase line leading-[67px]">
-              Creative
-            </h1>
-            <h1 className="text-white text-[82px] font-[600] uppercase line leading-[67px]">
-              <span className="flex items-end gap-6">
-                <span className="w-[130px] h-[50px] bg-[#B1FF00]">
-                  {/* <Image
-                  src="/img/cc.png"
-                  width={208}
-                  height={20}
-                  alt="arrow"
-                /> */}
-                </span>
-                <span>UI/UX</span>
-              </span>
-            </h1>
-            <h1 className="text-white text-[82px] font-[600] uppercase line leading-[67px]">
-              Design studio.
-            </h1>
-          </div>
-          <div>
-            <button className="btn-a uppercase">
-              <span>
-                <Image
-                  src="/img/csvg.svg"
-                  width={100}
-                  height={20}
-                  alt="arrow"
-                />
-              </span>{" "}
-              contact
-            </button>
-          </div>
-        </div>
-      </section>
+      <MainBanner/>
       <section className="sec-two h-screen bg-[url('/img/secbg.png')] py-12 flex items-center justify-center bg-fixed bg-center">
-        <div className="container mx-auto max-w-screen-xl bg-slate-900">
+        <div className="container mx-auto max-w-screen-xl ">
           <div className="space-y-6">
-            <div className="bg-red-500 w-full py-2">
+            <div className=" w-full py-2">
               <h2 className="text-white text-[82px] font-[600] uppercase line leading-[67px]">
                 Creating
                 <br /> Memorable
               </h2>
             </div>
-            <div className="bg-red-500 w-full py-2">
+            <div className="  w-full py-2">
               <h2 className="text-white text-[82px] font-[600] uppercase line leading-[67px] text-right">
                 Digital
                 <br />
@@ -63,7 +27,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <section className="sec-two h-screen py-12 flex items-center justify-center relative bg-fixed bg-center  bg-[url('/img/secbg.png')] bg-cover bg-center before:absolute before:-z-10  before:inset-0 before:bg-[#B1FF01]/50">
+      <section className="sec-two h-screen py-12 flex items-center justify-center relative bg-fixed    bg-[url('/img/secbg.png')] bg-cover bg-center before:absolute before:-z-10  before:inset-0 before:bg-[#B1FF01]/50">
         <div className="container mx-auto max-w-screen-xl ">
           <div className="grid grid-cols-2 gap-8">
             <div className="  w-full py-2">
@@ -233,8 +197,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <Marquee/>
-     
+      <Marquee />
+
       <section className="meets-sec">
         <div className="mhead h-[80vh] bg-[#FFA100] text-center pt-32">
           <h2 className="text-[82px] font-[600] uppercase text-black tall">
@@ -390,8 +354,8 @@ export default function Home() {
           </div>
         </div>
       </section>
-      <OurWork/>
-     
+      <OurWork />
+
       <footer className="footer-sec py-24 h-screen bg-[url('/img/footer-bg.png')] ">
         <div className="ft-shape">
           <svg
