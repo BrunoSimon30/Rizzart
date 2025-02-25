@@ -58,28 +58,43 @@ export default function OurWork() {
 
 
   return (
-    <section className="work-sec py-32">
-      <div className="space-y-24">
+    <section id="work" className="work-sec py-24 md:py-32">
+      <div className=" md:space-y-24 space-y-16">
         <div className="flex justify-between px-16">
           <div className="b-h flex items-center gap-4">
-            <h2 className="text-[#B1FF01] text-[82px] font-[600] uppercase  tall">
+            <h2 className="text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
               Our Work
             </h2>
-            <div className="gap-4 flex pb-5">
-              <span className="inline-block w-[60px] bg-[#B1FF01] h-[100px]"></span>
-              <span className="inline-block w-[60px] bg-[#B1FF01] h-[100px]"></span>
-              <span className="inline-block w-[60px] bg-[#B1FF01] h-[100px]"></span>
+            <div className="gap-2 md:gap-4 flex pb-5">
+              {[...Array(3)].map((_, i) => (
+                <span key={i} className="inline-block w-[30px] md:w-[3.125vw]  ">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 50 73"
+                    fill="none"
+                  >
+                    <path
+                      d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
+                      fill="#B1FF00"
+                    />
+                  </svg>
+                </span>
+              ))}
             </div>
           </div>
           <div>
             <button className="btn-a uppercase">
               <span>
-                <Image
-                  src="/img/csvg.svg"
-                  width={100}
-                  height={20}
-                  alt="arrow"
-                />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 50 73"
+              fill="none"
+            >
+              <path
+                d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
+                fill="#B1FF00"
+              />
+            </svg>
               </span>{" "}
               view all
             </button>
@@ -88,7 +103,7 @@ export default function OurWork() {
         <div className="mwarp overflow-hidden flex">
           <div className="mimg-container flex gap-4" ref={marqueeRef}>
             {[...Array(7)].map((_, i) => (
-              <div key={i} className="mimg">
+              <div key={i} className="mimg w-[250px] md:w-auto">
                 <Image
                   src={`/img/m${i + 1}.jpg`}
                   width={420}
