@@ -58,7 +58,7 @@ body{
 header {
   position: fixed;
   width: 100%;
-  top: 0;
+  top: 100px;
   left: 0;
   right: 0;
   z-index: 99;
@@ -97,16 +97,14 @@ header {
   color: #fff;
   position: relative;
   background: rgba(255, 255, 255, 0.10);
-  border: 1px solid #000000;
+ 
   
   position: relative;
   overflow: hidden;
   z-index: 1;
   transition: 0.3s;
 }
-.btn-a:hover{
-  border: 1px solid #222222;
-}
+
 .btn-a:hover span{
   transform: rotate(200deg);
 }
@@ -331,7 +329,7 @@ img.arrow
   right: 0;
   left: 0;
   margin: auto;
-  width: max-content;
+  width: 35%;
   height: fit-content;
   top: 0;
   bottom: 0;
@@ -345,10 +343,43 @@ img.arrow
   z-index: -1;
 }
 
+.vid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  margin: auto;
+  z-index: -1;
+  
+}
 
+.hero-sec::after{
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 
-
-
+/* background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 50%); */
+background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 50%);
+}
+.rotate {
+  position: absolute;
+  right: 14%;
+  scale: 1.6;
+  z-index: -1;
+  transform: rotate(-13deg);
+  top: 0;
+}
+.arcde-ab {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  margin: auto;
+  width: 50%;
+}
 
 /* media Q */
 @media (max-width: 1440px)
@@ -359,4 +390,29 @@ img.arrow
     width: 36%;
     
 }
+.rotate {
+  
+  right: 7%;
+  scale: 1.3;
+ 
+}
+.vid
+{
+  scale: 1.2;
+}
+}
+@media (max-width: 768px)
+{
+  .rotate
+  {
+    display: none;
+  }
+  .sub
+  {
+    width: 100%;
+  }
+  .vid {
+    
+    scale: 4;
+  }
 }

@@ -33,16 +33,26 @@ export default function MainBanner() {
       }, []);
 
   return (
-    <section  className="w-full h-screen flex items-end justify-center bg-fixed    bg-[url('/img/frame.png')] bg-cover">
-    <div className="w-full md:flex  items-end  justify-between px-6 md:px-16 pb-8">
+    <section id='home'  className="hero-sec w-full  h-screen flex items-end justify-center bg-fixed  relative overflow-hidden">
+        <video
+          className="vid"
+          id="vid"
+          autoPlay={true}
+          loop={true}
+          muted
+          controls={false}
+        >
+          <source src="/img/rizzvid.mp4" />
+        </video>
+    <div className="w-full md:flex  items-end  justify-between px-6 md:px-16  pb-20 lg:pb-8">
       <div className="textR-wrap"  ref={textRef}>
       <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[55px] md:leading-[3.49vw]">
+        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
             Creative
         </h1>
         </span>
         <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[55px] md:leading-[3.49vw]">
+        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
          
          <span className="flex items-end gap-6">
             <span className="w-[110px] md:w-[6.771vw]   bg-[#b3ff0000] flex items-center gap-3 ">
@@ -66,7 +76,7 @@ export default function MainBanner() {
         </h1>
         </span>
         <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[55px] md:leading-[3.49vw]">
+        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
         Design studio<span className='text-[#B1FF00]'>.</span>
         </h1>
         </span>

@@ -13,7 +13,6 @@ export default function Footer() {
         <div className="ft-shape hidden xl:block">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-          
             viewBox="0 0 635 1011"
             fill="none"
           >
@@ -24,8 +23,8 @@ export default function Footer() {
           </svg>
         </div>
         <div className="container mx-auto max-w-screen-xl md:px-14">
-          <div className="border-2 border-black md:grid md:grid-cols-2 ">
-            <div className="newsl py-8 px-12 ">
+          <div className="border-2 border-black md:grid md:grid-cols-2  ">
+            <div className="newsl py-8 px-12 bg-[#B1FF01]">
               <h1 className="text-black text-[40px] md:text-[3.385vw] font-[600] uppercase line leading-[43px] md:leading-[3.49vw]">
                 Newsletter
                 <br />
@@ -40,14 +39,13 @@ export default function Footer() {
                   />
                   <button className="bg-[#B1FF01] px-6 py-2 rounded-full text-[16px] font-[700] uppercase btn-sub">
                     <span>
-                    
                       <BsSend />
                     </span>
                   </button>
                 </div>
               </form>
             </div>
-            <div className="newsr  py-8 px-12 space-y-6 border-t-2 md:border-l-2 md:border-t-0 border-black">
+            <div className="newsr  py-8 px-12 space-y-6 border-t-2 md:border-l-2 md:border-t-0 border-black bg-[#B1FF01]">
               <h1 className="text-[40px] md:text-[3.385vw] font-[600] uppercase line leading-[43px] md:leading-[3.49vw]">
                 Lorem ipsum
                 <br />
@@ -61,7 +59,7 @@ export default function Footer() {
           </div>
           <div className="ft-btm ">
             <div className="md:grid md:grid-cols-4 gap-12 items-center space-y-6 md:space-y-0">
-              <div className="ft-link w-[150px] bg-black p-2">
+              <div className="ft-link w-[150px] bg-black 2xl:bg-transparent p-2">
                 <Link href="/">
                   <Image
                     src="/img/ft-logo.png"

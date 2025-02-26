@@ -48,7 +48,7 @@ export default function Marquee() {
 
 
   return (
-    <section className="m-sec pt-4 md:pt-2 pb-5 bg-[#B1FF00]">
+    <section id="team" className="m-sec pt-4 md:pt-2 pb-5 bg-[#B1FF00]">
         <div className="maquee-wrap overflow-hidden flex">
       <div className="marquee-inner flex" ref={marqueeRef}>
         {[...Array(10)].map((_, i) => (

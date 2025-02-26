@@ -60,7 +60,7 @@ export default function OurWork() {
   return (
     <section id="work" className="work-sec py-24 md:py-32">
       <div className=" md:space-y-24 space-y-16">
-        <div className="flex justify-between px-16">
+        <div className="flex justify-between px-8 md:px-16">
           <div className="b-h flex items-center gap-4">
             <h2 className="text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
               Our Work
@@ -82,10 +82,11 @@ export default function OurWork() {
               ))}
             </div>
           </div>
-          <div>
-            <button className="btn-a uppercase">
-              <span>
+          <div className="hidden md:block">
+          <button className="btn-a uppercase ">
+          <span>
             <svg
+             className='w-[1.667vw] '
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 50 73"
               fill="none"
@@ -95,9 +96,9 @@ export default function OurWork() {
                 fill="#B1FF00"
               />
             </svg>
-              </span>{" "}
-              view all
-            </button>
+          </span>{" "}
+          View All
+        </button>
           </div>
         </div>
         <div className="mwarp overflow-hidden flex">

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function Blogs() {
   const [activeTab, setActiveTab] = useState("one");
@@ -29,7 +30,15 @@ export default function Blogs() {
           </div>
         </div>
         <div className="md:grid md:grid-cols-5 gap-8">
-          <div className="col-span-3  w-full ">
+          <div className="col-span-3  w-full  relative">
+            <div className="rotate">
+               <Image
+                                  src="/img/360.gif"
+                                  width={500}
+                                  height={500}
+                                  alt="arrow"
+                                />
+            </div>
             <h2 className="text-[#F1FFC4] uppercase text-[23px] font-semibold leading-[21px] ">
               Digital
               <br />
@@ -37,7 +46,7 @@ export default function Blogs() {
             </h2>
             <div className="flex gap-4   md:block py-4 justify-center md:justify-start">
               <button
-                className={`text-[25px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
+                className={`text-[18px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
                   activeTab === "one" ? "  text-white md:pb-24" : "text-[#797979]"
                 }`}
                 onClick={() => setActiveTab("one")}
@@ -45,7 +54,7 @@ export default function Blogs() {
                 Blog One
               </button>
               <button
-                className={`text-[25px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
+                className={`text-[18px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
                   activeTab === "two" ? "  text-white md:pb-24" : "text-[#797979]"
                 }`}
                 onClick={() => setActiveTab("two")}
@@ -54,7 +63,7 @@ export default function Blogs() {
               </button>
 
               <button
-                className={`text-[25px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
+                className={`text-[18px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
                   activeTab === "three" ? "  text-white md:pb-24" : "text-[#797979]"
                 }`}
                 onClick={() => setActiveTab("three")}
