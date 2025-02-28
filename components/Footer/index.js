@@ -1,16 +1,52 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef } from "react";
 import { BsSend } from "react-icons/bs";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 export default function Footer() {
+const footerRef = useRef(null);
+  useGSAP(() => {
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: footerRef.current,
+        start: "top 60%", // Jab section viewport ke 80% pe aaye
+        end: "bottom 50%",
+        // markers: true,
+        // pin: true,
+        // scrub: 4,
+        // toggleActions: "play pause resume reset",
+        toggleActions: "play none none reverse",
+      },
+    });
+
+    tl.from(
+      footerRef.current?.querySelectorAll(".up"),
+      {
+        y: 100,
+        duration: 1,
+        opacity: 0,
+        stagger: 0.4,
+        ease: "power3.out",
+      },
+      "run"
+    )
+   
+    ;
+  }, []);
+
+
+
   return (
     <>
       <footer
-        id="contact"
+      ref={footerRef}
+       
         className="footer-sec py-8 md:py-24 px-6 md:px-0 2xl:h-screen bg-[url('/img/footer-bg.png')] relative"
       >
-        <div className="ft-shape hidden xl:block">
+        <div className="ft-shape hidden xl:block up">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 635 1011"
@@ -23,7 +59,7 @@ export default function Footer() {
           </svg>
         </div>
         <div className="container mx-auto max-w-screen-xl md:px-14">
-          <div className="border-2 border-black md:grid md:grid-cols-2  ">
+          <div className="up border-2 border-black md:grid md:grid-cols-2  ">
             <div className="newsl py-8 px-12 bg-[#B1FF01]">
               <h1 className="text-black text-[40px] md:text-[3.385vw] font-[600] uppercase line leading-[43px] md:leading-[3.49vw]">
                 Newsletter
@@ -57,7 +93,7 @@ export default function Footer() {
               </p>
             </div>
           </div>
-          <div className="ft-btm ">
+          <div className="up ft-btm ">
             <div className="md:grid md:grid-cols-4 gap-12 items-center space-y-6 md:space-y-0">
               <div className="ft-link w-[150px] bg-black 2xl:bg-transparent p-2">
                 <Link href="/">

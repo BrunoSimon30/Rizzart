@@ -3,15 +3,35 @@ import React from 'react'
 import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from '@gsap/react';
+ import { ScrollTrigger } from "gsap/ScrollTrigger";
+ 
+// ScrollTrigger ko register karein
+gsap.registerPlugin(ScrollTrigger);
 
 
 export default function MainBanner() {
     const textRef = useRef(null);
     const btnRef = useRef(null);  
+    const banRef = useRef(null);  
 
     
 
     useGSAP(() => {
+
+   gsap.to(banRef.current, {
+      scrollTrigger: {
+        trigger: banRef.current,
+        scroller: 'body',
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        scrub: 1,
+        // markers: true,
+      }
+    });
+
+
         const tl = gsap.timeline(); // Create a GSAP timeline
     
         tl.from(textRef.current?.querySelectorAll("h1"), {
@@ -33,7 +53,7 @@ export default function MainBanner() {
       }, []);
 
   return (
-    <section id='home'  className="hero-sec w-full  h-screen flex items-end justify-center bg-fixed  relative overflow-hidden">
+    <section ref={banRef} id='home'  className="hero-sec w-full  h-screen flex items-end justify-center bg-fixed  relative overflow-hidden">
         <video
           className="vid"
           id="vid"

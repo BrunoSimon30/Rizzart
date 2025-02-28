@@ -10,21 +10,31 @@ gsap.registerPlugin(ScrollTrigger);
 export default function About() {
 
   const aboutRed = useRef(null);
-  // useEffect(() => {
-  //   let words = headingRef.current.innerHTML.split(" ");
-  //   headingRef.current.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(" ");
-  //   console.log(words);
-    
-  // }, []);
-
+ 
+  const headingRef = useRef(null);
+ 
 
   useGSAP(() => {
+    if (headingRef.current) {
+      // Sare children nodes nikal lo
+      const nodes = Array.from(headingRef.current.childNodes);
+      
+      nodes.forEach((node) => {
+        // Agar yeh text node hai, toh uske words wrap kar do
+        if (node.nodeType === Node.TEXT_NODE) {
+          const words = node.textContent.split(" ").map(word => `<span class="word">${word}</span>`).join(" ");
+          const spanWrapper = document.createElement("span");
+          spanWrapper.innerHTML = words;
+          node.replaceWith(...spanWrapper.childNodes);
+        }
+      });
+    }
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: aboutRed.current,
         start: "top 20%", // Jab section viewport ke 80% pe aaye
         end: "bottom 50%",
-        markers:true,
+        // markers:true,
         // pin: true,
         // scrub: 4,
         // toggleActions: "play pause resume reset",
@@ -32,8 +42,7 @@ export default function About() {
       },
     });
 
-    tl.from(
-      aboutRed.current?.querySelectorAll(".gl h2 , .gl svg"),
+    tl.from(aboutRed.current?.querySelectorAll(".gl h2 , .gl svg"),
       {
         y: 100,
         duration: 1,
@@ -43,6 +52,28 @@ export default function About() {
       },
       "run"
     )
+ 
+    .from(headingRef.current?.querySelectorAll("span"),
+    {
+      y: 100,
+      duration: 0.2,
+      opacity: 0,
+      stagger: 0.2,
+      ease: "power1.out",
+   
+    },
+     "run"
+  )
+  .from(
+    aboutRed.current?.querySelectorAll(".arcde-ab"),
+    {
+      scale: 0,
+      duration: 2,
+      stagger: 0.4,
+      ease: "power1.out",
+    },
+    "run"
+  )
      
       
   }, []);
@@ -112,29 +143,29 @@ export default function About() {
             </div>
             <div className="md:grid md:grid-cols-5 gap-8">
               <div className="md:col-span-3  w-full py-2">
-                <h2 className="text-white text-[40px]  md:text-[4.5vw]  font-[600]   uppercase leading-[50px] md:leading-[5vw] mb-24">
+                <h2  ref={headingRef} className="overflow-hidden   text-white text-[40px]  md:text-[4.5vw]  font-[600]   uppercase leading-[50px] md:leading-[5vw] mb-24">
                   Ut enim ad minim
                   <br />
-                  veniam quis{" "}
-                  <span className="inline-block w-[20px] md:w-[2.3vw]  ">
+                  veniam quis 
+                  <span className="inline-block w-[20px] md:w-[2.3vw]  mx-3">
                     <svg viewBox="0 0 50 73" fill="none">
                       <path
                         d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
                         fill="#fff"
                       />
                     </svg>
-                  </span>{" "}
+                  </span> 
                   nostrud exercitation ullamco
                   <br />
-                  ad{" "}
-                  <span className="inline-block w-[20px] md:w-[2.3vw]  ">
+                  ad
+                  <span className="inline-block w-[20px] md:w-[2.3vw] mx-3 ">
                     <svg viewBox="0 0 50 73" fill="none">
                       <path
                         d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
                         fill="#fff"
                       />
                     </svg>
-                  </span>{" "}
+                  </span>
                   minim.
                 </h2>
               </div>

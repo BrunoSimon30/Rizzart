@@ -182,8 +182,8 @@ background-color: #B1FF01;
 }
 
 .met-wrap {
-  margin-top: -27%;
-  padding: 0 20px;
+  margin-top: -25%;
+  
 }
 .lbox {
   width: 47%;
@@ -193,7 +193,7 @@ background-color: #B1FF01;
   right: 0;
   left: 0;
   margin: auto;
-  transform: skewX(-0.06turn);
+  /* transform: skewX(-0.06turn); */
   top: -1px;
 }
 
@@ -380,10 +380,72 @@ background: linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 50%);
   margin: auto;
   width: 50%;
 }
+span.word
+{
+  display: inline-block;
+
+}
+ 
+section.sec-two {
+  z-index: 1;
+}
+.m-sec {
+  position: relative;
+  z-index: 1;
+}
+.contact-sec{
+  position: relative;
+  z-index: 1;
+}
+
+ 
+/* form */
+.conf input, .conf textarea {
+  border-bottom: 1px solid #4B4B4B;
+  width: 100%;
+  background-color: transparent;
+  color: #fff;
+  padding: 10px 12px;
+  transition: 0.3s;
+  font-size: 17px;
+  letter-spacing: 1px;
+}
+.conf textarea
+{
+  resize: none;
+  height: 150px;
+}
+.conf input:focus, .conf textarea:focus {
+  border-bottom: 1px solid #B1FF01;
+}
+
+.conf button {
+  color: #000;
+  background-color: #B1FF01;
+  font-weight: 700;
+  padding: 10px 50px;
+  border-radius: 30px;
+}
+.con-i img {
+  transform: rotate(5deg);
+  
+}
+
+
+
+
+
+
+
+
 
 /* media Q */
 @media (max-width: 1440px)
 {
+  .con-i img {
+  
+    width: 43%;
+  }
   .ft-shape {
     
     left: -80px;

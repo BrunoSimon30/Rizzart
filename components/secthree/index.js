@@ -40,7 +40,7 @@ export default function Secthree() {
           scale: 0,
           duration: 2,
           stagger: 0.4,
-          ease: "bounce.out",
+          ease: "power3.out",
         },
         "run"
       )

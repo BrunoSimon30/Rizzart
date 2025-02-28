@@ -3,9 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+// ScrollTrigger ko register karein
+gsap.registerPlugin(ScrollTrigger);
 
 export default function OurWork() {
-     
+  const teamRef = useRef(null);
     const marqueeRef = useRef(null);
     const [direction, setDirection] = useState(-1); // Default: Left (-1)
   
@@ -56,16 +61,62 @@ export default function OurWork() {
       };
     }, []);
 
+     
+    
+      useGSAP(() => {
+
+
+ gsap.to(teamRef.current, {
+      scrollTrigger: {
+        trigger: teamRef.current,
+        scroller: 'body',
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        pinSpacing: false,
+        scrub: 1,
+        // markers: true,
+      }
+    });
+
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: teamRef.current,
+            start: "top 40%", // Jab section viewport ke 80% pe aaye
+            end: "bottom 50%",
+            // markers: true,
+            // pin: true,
+            // scrub: 4,
+            // toggleActions: "play pause resume reset",
+            toggleActions: "play none none reverse",
+          },
+        });
+    
+        tl.from(
+          teamRef.current?.querySelectorAll(".up"),
+          {
+            y: 100,
+            duration: 1,
+            opacity: 0,
+           
+            ease: "power3.out",
+          },
+          "run"
+        )
+       
+        ;
+      }, []);
+
 
   return (
-    <section id="work" className="work-sec py-24 md:py-32">
+    <section ref={teamRef} id="work" className="work-sec py-24 md:py-32 ">
       <div className=" md:space-y-24 space-y-16">
         <div className="flex justify-between px-8 md:px-16">
           <div className="b-h flex items-center gap-4">
-            <h2 className="text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
+            <h2 className=" up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
               Our Work
             </h2>
-            <div className="gap-2 md:gap-4 flex pb-5">
+            <div className="up gap-2 md:gap-4 flex pb-5">
               {[...Array(3)].map((_, i) => (
                 <span key={i} className="inline-block w-[30px] md:w-[3.125vw]  ">
                   <svg
@@ -82,7 +133,7 @@ export default function OurWork() {
               ))}
             </div>
           </div>
-          <div className="hidden md:block">
+          <div className="hidden md:block up">
           <button className="btn-a uppercase ">
           <span>
             <svg
@@ -101,7 +152,7 @@ export default function OurWork() {
         </button>
           </div>
         </div>
-        <div className="mwarp overflow-hidden flex">
+        <div className="mwarp overflow-hidden flex up">
           <div className="mimg-container flex gap-4" ref={marqueeRef}>
             {[...Array(7)].map((_, i) => (
               <div key={i} className="mimg w-[250px] md:w-auto">

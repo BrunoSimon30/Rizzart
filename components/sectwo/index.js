@@ -14,10 +14,10 @@ export default function Sectwo() {
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: SecWrap.current,
-        start: "top 10%", // Jab section viewport ke 80% pe aaye
-        end: "bottom 50%",
+        start: "top", // Jab section viewport ke 80% pe aaye
+        end: "bottom",
         // markers:true,
-        // pin: true,
+        pin: true,
         // scrub: 4,
         // toggleActions: "play pause resume reset",
         toggleActions: "play none none reverse",
@@ -38,13 +38,32 @@ export default function Sectwo() {
       .from(
         SecWrap.current?.querySelectorAll(".lcurr"),
         {
-          scale: 0,
+          scale:0,
+          opacity:0,
+          rotation: 90,
           duration: 2,
           stagger: 0.4,
-          ease: "bounce.out",
+          ease: "none",
+          scrollTrigger: {
+            trigger: SecWrap.current, // Yeh pura section target karega
+            start: "top", // Jab section viewport ke 80% pe aaye
+            end: "bottom",
+            scrub:1, // Smooth effect scroll ke saath
+            // markers: true, // Debug markers (Baad mein hata sakte ho)
+          },
         },
         "run"
       )
+      // .from(
+      //   SecWrap.current?.querySelectorAll(".lcurr"),
+      //   {
+      //     scale: 0,
+      //     duration: 2,
+      //     stagger: 0.4,
+      //     ease: "bounce.out",
+      //   },
+      //   "run"
+      // )
       .from(
         SecWrap.current?.querySelectorAll(".gr"),
         {
@@ -61,7 +80,7 @@ export default function Sectwo() {
   return (
     <section
       ref={SecWrap}
-      className="sec-two h-screen bg-[url('/img/secbg.png')] py-12 flex items-center justify-center bg-fixed bg-center relative"
+      className="sec-two h-screen bg-[url('/img/secbg1.jpg')] py-12 flex items-center justify-center bg-fixed bg-center relative"
     >
       <div className="sub">
         <div className="lcurr w-1/2  m-auto  lg:w-fit  py-24">

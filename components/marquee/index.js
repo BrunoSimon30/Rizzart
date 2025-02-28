@@ -3,9 +3,15 @@ import Image from "next/image";
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+// ScrollTrigger ko register karein
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Marquee() {
     const marqueeRef = useRef(null);
+    const marRef = useRef(null);
     const [direction, setDirection] = useState(-1); // Default: Left (-1)
 
     useEffect(() => {
@@ -47,8 +53,39 @@ export default function Marquee() {
     }, []);
 
 
+    useGSAP(() => {
+   
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: marRef.current,
+            start: "top 80%", // Jab section viewport ke 80% pe aaye
+            end: "bottom 50%",
+            // markers:true,
+            // pin: true,
+            // scrub: 4,
+            // toggleActions: "play pause resume reset",
+            toggleActions: "play none none reverse",
+          },
+        });
+    
+        tl.from(
+          marRef.current?.querySelectorAll(".marquee-inner"),
+          {
+            y: 100,
+            duration: 1,
+            opacity: 0,
+            stagger: 0.4,
+            ease: "power3.out",
+          },
+          "run"
+        )
+      
+         
+      }, []);
+
+
   return (
-    <section id="team" className="m-sec pt-4 md:pt-2 pb-5 bg-[#B1FF00]">
+    <section ref={marRef}  className="m-sec pt-4 md:pt-2 pb-5 bg-[#B1FF00]">
         <div className="maquee-wrap overflow-hidden flex">
       <div className="marquee-inner flex" ref={marqueeRef}>
         {[...Array(10)].map((_, i) => (
