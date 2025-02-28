@@ -1,15 +1,28 @@
 import axios from "axios";
 import Image from "next/image";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
+    firstName: "",
+    emailAddress: "",
+    phoneNumber: "",
     message: "",
   });
 
+  const router = useRouter();
+  const pathName = router.pathname;
+
+  const webUrl = 'https://rizznart.com';
+  const url = `${webUrl}${pathName}`;
+   
+
+  // Set url in formData when component mounts
+  useEffect(() => {
+    setFormData((prevData) => ({ ...prevData, url: url }));
+  }, [url]);
+  
   useEffect(() => {
     console.log(formData);
   }, [formData]);
@@ -24,10 +37,10 @@ export default function Contact() {
     try {
       const response = await axios.post("/api/submit", formData);
       console.log("Response:", response.data);
-      alert("Form submitted successfully!");
+      
     } catch (error) {
       console.error("Error:", error);
-      alert("There was an error submitting the form.");
+    
     }
   };
 
@@ -72,9 +85,9 @@ export default function Contact() {
                     <input
                       type="text"
                       id="name"
-                      name="name"
+                      name="firstName"
                       placeholder="Enter your name"
-                      value={formData.name}
+                      value={formData.firstName}
                       onChange={handleChange}
                       className="bg-transparent outline-none"
                       required
@@ -91,9 +104,9 @@ export default function Contact() {
                     <input
                       type="email"
                       id="email"
-                      name="email"
+                      name="emailAddress"
                       placeholder="Enter your email address"
-                      value={formData.email}
+                      value={formData.emailAddress}
                       onChange={handleChange}
                       className="bg-transparent outline-none"
                       required
@@ -110,9 +123,9 @@ export default function Contact() {
                     <input
                       type="tel"
                       id="phone"
-                      name="phone"
+                      name="phoneNumber"
                       placeholder="Enter your phone number"
-                      value={formData.phone}
+                      value={formData.phoneNumber}
                       onChange={handleChange}
                       className="bg-transparent outline-none"
                       required
