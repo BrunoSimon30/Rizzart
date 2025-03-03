@@ -112,29 +112,29 @@ const footerRef = useRef(null);
                 <div className="flex gap-6 md:gap-24">
                   <ul className="ft-lin SMN_effect-15">
                     <li>
-                      <Link href="/">home</Link>
+                      <Link href="#home">home</Link>
                     </li>
                     <li>
-                      <Link href="/">works</Link>
+                      <Link href="#about">About</Link>
                     </li>
                     <li>
-                      <Link href="/">blogs</Link>
+                      <Link href="#blogs">blogs</Link>
                     </li>
                   </ul>
                   <ul className="ft-lin SMN_effect-15">
                     <li>
-                      <Link href="/">team</Link>
+                      <Link href="#team">team</Link>
                     </li>
                     <li>
-                      <Link href="/">prices</Link>
+                      <Link href="#work">Work</Link>
                     </li>
                     <li>
-                      <Link href="/">contact</Link>
+                      <Link href="#contact">contact</Link>
                     </li>
                   </ul>
                 </div>
               </div>
-              <div className="ft-link space-y-2 md:space-y-8">
+              <div className="ft-link space-y-2 md:space-y-8 ">
                 <h3 className="text-[25px] md:text-[3.229vw] text-black font-[600] uppercase tall">
                   Useful link
                 </h3>
@@ -156,10 +156,10 @@ const footerRef = useRef(null);
                 </h3>
                 <ul className="ft-lin SMN_effect-15">
                   <li>
-                    <Link href="/">info@rizznart.com</Link>
+                    <Link href="mailto:info@rizznart.com">info@rizznart.com</Link>
                   </li>
                   <li>
-                    <Link href="/">instagram</Link>
+                    <Link href=''>instagram</Link>
                   </li>
                   <li>
                     <div className="h-6 "></div>
