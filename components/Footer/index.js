@@ -1,13 +1,57 @@
 import Image from "next/image";
 import Link from "next/link";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { BsSend } from "react-icons/bs";
+import { RiLoaderFill } from "react-icons/ri";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import axios from "axios";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Footer() {
-const footerRef = useRef(null);
+  gsap.registerPlugin(ScrollTrigger);
+
+  const footerRef = useRef(null);
+  const [formData, setFormData] = useState({
+    email: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const response = await axios.post(
+        "https://api.rizznart.com:3088/api/newsletter",
+        formData
+      );
+      console.log("Response:", response.data);
+      toast.success("Sent successfully!", {
+        position: "bottom-right",
+        autoClose: 2000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+      });
+      setFormData({ email: "" });
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to send your message. Please try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   useGSAP(() => {
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -32,19 +76,14 @@ const footerRef = useRef(null);
         ease: "power3.out",
       },
       "run"
-    )
-   
-    ;
+    );
   }, []);
-
-
 
   return (
     <>
       <footer
-      ref={footerRef}
-       
-        className="footer-sec py-8 md:py-24 px-6 md:px-0 2xl:h-screen bg-[url('/img/footer-bg.png')] relative"
+        ref={footerRef}
+        className="footer-sec py-8 md:py-24 px-6 md:px-0   bg-[url('/img/footer-bg.png')] relative"
       >
         <div className="ft-shape hidden xl:block up">
           <svg
@@ -61,35 +100,42 @@ const footerRef = useRef(null);
         <div className="container mx-auto max-w-screen-xl md:px-14">
           <div className="up border-2 border-black md:grid md:grid-cols-2  ">
             <div className="newsl py-8 px-12 bg-[#B1FF01]">
-              <h1 className="text-black text-[40px] md:text-[3.385vw] font-[600] uppercase line leading-[43px] md:leading-[3.49vw]">
+              <h2 className="text-black text-[40px] md:text-[2.385vw] font-[600] uppercase line leading-[43px] md:leading-[2.385vw]">
                 Newsletter
                 <br />
-                stay in touch
-              </h1>
-              <form>
+                Sign Up, Don't Regret
+              </h2>
+              <form onSubmit={handleSubmit}>
                 <div className="new-input flex gap-2 mt-8">
                   <input
-                    type="text"
+                    type="email"
+                    id="email"
+                    name="email"
                     placeholder="Enter your email address"
+                    value={formData.email}
+                    onChange={handleChange}
                     className="w-full px-4 py-2 rounded-full outline-none bg-transparent text-black placeholder-black text-[18px] font-[500]"
+                    required
                   />
-                  <button className="bg-[#B1FF01] px-6 py-2 rounded-full text-[16px] font-[700] uppercase btn-sub">
-                    <span>
-                      <BsSend />
-                    </span>
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="bg-[#B1FF01] px-6 py-2 rounded-full text-[16px] font-[700] uppercase btn-sub"
+                  >
+                    <span>{loading ? <RiLoaderFill /> : <BsSend />}</span>
                   </button>
                 </div>
               </form>
             </div>
             <div className="newsr  py-8 px-12 space-y-6 border-t-2 md:border-l-2 md:border-t-0 border-black bg-[#B1FF01]">
-              <h1 className="text-[40px] md:text-[3.385vw] font-[600] uppercase line leading-[43px] md:leading-[3.49vw]">
-                Lorem ipsum
+              <h2 className="text-[40px] md:text-[2.385vw] font-[600] uppercase line leading-[43px] md:leading-[2.385vw]">
+                Get In Touch
                 <br />
-                dolor sit amet
-              </h1>
+                (We Won't Bite)
+              </h2>
               <p className="text-black font-[500] text-[23px] ">
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat.
+                We Don’t Just Talk—we Create. Hit Us Up And Let’s Make Your
+                Brand Unforgettable!
               </p>
             </div>
           </div>
@@ -106,7 +152,7 @@ const footerRef = useRef(null);
                 </Link>
               </div>
               <div className="ft-link space-y-2 md:space-y-8">
-                <h3 className="text-[25px] md:text-[3.229vw]  text-black font-[600] uppercase tall">
+                <h3 className="text-[25px] md:text-[2.229vw]  text-black font-[600] uppercase tall">
                   Quick link
                 </h3>
                 <div className="flex gap-6 md:gap-24">
@@ -118,7 +164,7 @@ const footerRef = useRef(null);
                       <Link href="#about">About</Link>
                     </li>
                     <li>
-                      <Link href="#blogs">blogs</Link>
+                      <Link href="/blogs">blogs</Link>
                     </li>
                   </ul>
                   <ul className="ft-lin SMN_effect-15">
@@ -134,38 +180,50 @@ const footerRef = useRef(null);
                   </ul>
                 </div>
               </div>
-              <div className="ft-link space-y-2 md:space-y-8 ">
-                <h3 className="text-[25px] md:text-[3.229vw] text-black font-[600] uppercase tall">
+              <div className="ft-link space-y-2 md:space-y-8">
+                <h3 className="text-[25px] md:text-[2.229vw] text-black font-[600] uppercase tall">
                   Useful link
                 </h3>
                 <ul className="ft-lin SMN_effect-15">
                   <li>
-                    <Link href="/">Privacy Policy </Link>
+                    <Link href="/privacy-policy">Privacy Policy </Link>
                   </li>
                   <li>
-                    <Link href="/">Career</Link>
+                    <Link href="/terms-and-conditions">terms & conditions</Link>
                   </li>
                   <li>
-                    <Link href="/">terms & conditions</Link>
+                    <Link href="/"></Link>
                   </li>
                 </ul>
               </div>
               <div className="ft-link space-y-2 md:space-y-8">
-                <h3 className="text-[25px] md:text-[3.229vw] text-black font-[600] uppercase tall">
+                <h3 className="text-[25px] md:text-[2.229vw] text-black font-[600] uppercase tall">
                   Contact
                 </h3>
                 <ul className="ft-lin SMN_effect-15">
                   <li>
-                    <Link href="mailto:info@rizznart.com">info@rizznart.com</Link>
+                    <Link href="mailto:info@rizznart.com">
+                      info@rizznart.com
+                    </Link>
                   </li>
                   <li>
-                    <Link href=''>instagram</Link>
+                    <Link href="">instagram</Link>
                   </li>
                   <li>
                     <div className="h-6 "></div>
                   </li>
                 </ul>
               </div>
+            </div>
+          </div>
+          <div className="up  mt-12 text-center md:pl-32 ">
+            <div className="bg-black py-4 rounded px-4 md:px-32">
+              <p className="text-white text-[17px]">
+                RizznArt blends art and strategy to create immersive visuals
+                that connect, engage, and make brands impossible to ignore. (
+                <span className="text-red-500">Warning</span>: Side effects may
+                include extreme brand recognition.)
+              </p>
             </div>
           </div>
         </div>

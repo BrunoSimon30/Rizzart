@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import  { React,useEffect,useRef } from 'react'
+import Image from "next/image";
+import { React, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -8,21 +8,22 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
-
   const aboutRed = useRef(null);
- 
+
   const headingRef = useRef(null);
- 
 
   useGSAP(() => {
     if (headingRef.current) {
       // Sare children nodes nikal lo
       const nodes = Array.from(headingRef.current.childNodes);
-      
+
       nodes.forEach((node) => {
         // Agar yeh text node hai, toh uske words wrap kar do
         if (node.nodeType === Node.TEXT_NODE) {
-          const words = node.textContent.split(" ").map(word => `<span class="word">${word}</span>`).join(" ");
+          const words = node.textContent
+            .split(" ")
+            .map((word) => `<span class="word">${word}</span>`)
+            .join(" ");
           const spanWrapper = document.createElement("span");
           spanWrapper.innerHTML = words;
           node.replaceWith(...spanWrapper.childNodes);
@@ -42,7 +43,8 @@ export default function About() {
       },
     });
 
-    tl.from(aboutRed.current?.querySelectorAll(".gl h2 , .gl svg"),
+    tl.from(
+      aboutRed.current?.querySelectorAll(".gl h2 , .gl svg"),
       {
         y: 100,
         duration: 1,
@@ -52,44 +54,45 @@ export default function About() {
       },
       "run"
     )
- 
-    .from(headingRef.current?.querySelectorAll("span"),
-    {
-      y: 100,
-      duration: 0.2,
-      opacity: 0,
-      stagger: 0.2,
-      ease: "power1.out",
-   
-    },
-     "run"
-  )
-  .from(
-    aboutRed.current?.querySelectorAll(".arcde-ab"),
-    {
-      scale: 0,
-      duration: 2,
-      stagger: 0.4,
-      ease: "power1.out",
-    },
-    "run"
-  )
-     
-      
+
+      .from(
+        headingRef.current?.querySelectorAll("span"),
+        {
+          y: 100,
+          duration: 0.2,
+          opacity: 0,
+          stagger: 0.2,
+          ease: "power1.out",
+        },
+        "run"
+      )
+      .from(
+        aboutRed.current?.querySelectorAll(".arcde-ab"),
+        {
+          scale: 0,
+          duration: 2,
+          stagger: 0.4,
+          ease: "power1.out",
+        },
+        "run"
+      );
   }, []);
-
-
 
   return (
     <>
-     <section ref={aboutRed} id="about" className="about-sec  h-screen p-6 flex items-center  ">
+      <section
+        ref={aboutRed}
+        id="about"
+        className="about-sec  h-screen p-6 flex items-center  "
+      >
         <div className="bg-[url('/img/frame.png')] rounded-2xl py-16 mt-6">
           <div className="px-6 md:px-14 space-y-12">
             <div className="flex justify-between w-full items-center">
-              <div className='gl overflow-hidden'>
-                <h2  className="text-[#F1FFC4] uppercase text-[23px] font-semibold leading-[21px]">
-                  RizzNArt<br/>
-                   is here
+              <div className="gl overflow-hidden">
+                <h2 className="text-[#F1FFC4] uppercase text-[23px] font-semibold leading-[21px]">
+                  RizzNArt
+                  <br />
+                  is here
                 </h2>
               </div>
               <div className="gl overflow-hidden">
@@ -143,10 +146,13 @@ export default function About() {
             </div>
             <div className="md:grid md:grid-cols-5 gap-8">
               <div className="md:col-span-3  w-full py-2">
-                <h2  ref={headingRef} className="overflow-hidden   text-white text-[40px]  md:text-[4.5vw]  font-[600]   uppercase leading-[50px] md:leading-[5vw] mb-24">
-                  Ut enim ad minim
+                <h2
+                  ref={headingRef}
+                  className="overflow-hidden   text-white text-[40px]  md:text-[4vw]  font-[600]   uppercase leading-[50px] md:leading-[4.5vw] mb-24"
+                >
+                  Glitch The Ordinary
                   <br />
-                  veniam quis 
+                  Design
                   <span className="inline-block w-[20px] md:w-[2.3vw]  mx-3">
                     <svg viewBox="0 0 50 73" fill="none">
                       <path
@@ -154,19 +160,19 @@ export default function About() {
                         fill="#fff"
                       />
                     </svg>
-                  </span> 
-                  nostrud exercitation ullamco
-                  <br />
-                  ad
-                  <span className="inline-block w-[20px] md:w-[2.3vw] mx-3 ">
+                  </span>
+                  With No Speed
+                  <br /> Limit
+                  Visuals<span className="inline-block w-[20px] md:w-[2.3vw] mx-3 ">
                     <svg viewBox="0 0 50 73" fill="none">
                       <path
                         d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
                         fill="#fff"
                       />
                     </svg>
-                  </span>
-                  minim.
+                  </span>So
+                  <br />
+                  Wild, Even Your Brain Buffered.
                 </h2>
               </div>
               <div className="md:col-span-2 relative  w-full py-2 px-8   hidden md:block">
@@ -182,7 +188,7 @@ export default function About() {
             </div>
           </div>
         </div>
-      </section> 
+      </section>
     </>
-  )
+  );
 }

@@ -114,7 +114,7 @@ export default function OurWork() {
         <div className="flex justify-between px-8 md:px-16">
           <div className="b-h flex items-center gap-4">
             <h2 className=" up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
-              Our Work
+            Creations From Our Corner
             </h2>
             <div className="up gap-2 md:gap-4 flex pb-5">
               {[...Array(3)].map((_, i) => (

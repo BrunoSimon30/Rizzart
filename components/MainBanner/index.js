@@ -18,18 +18,6 @@ export default function MainBanner() {
 
     useGSAP(() => {
 
-   gsap.to(banRef.current, {
-      scrollTrigger: {
-        trigger: banRef.current,
-        scroller: 'body',
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        pinSpacing: false,
-        scrub: 1,
-        // markers: true,
-      }
-    });
 
 
         const tl = gsap.timeline(); // Create a GSAP timeline
@@ -62,17 +50,17 @@ export default function MainBanner() {
           muted
           controls={false}
         >
-          <source src="/img/rizzvid.mp4" />
+          <source src="/img/rizzvid.webm" />
         </video>
     <div className="w-full md:flex  items-end  justify-between px-6 md:px-16  pb-20 lg:pb-8">
       <div className="textR-wrap"  ref={textRef}>
       <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
-            Creative
+        <h1 className="text-white text-[45px] md:text-[3.2vw] font-[600] uppercase line  leading-[45px] md:leading-[3.2vw]">
+        Rizznart Disrupts
         </h1>
         </span>
         <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
+        <h1 className="text-white text-[45px] md:text-[3.2vw] font-[600] uppercase line  leading-[45px] md:leading-[3.2vw]">
          
          <span className="flex items-end gap-6">
             <span className="w-[110px] md:w-[6.771vw]   bg-[#b3ff0000] flex items-center gap-3 ">
@@ -90,14 +78,14 @@ export default function MainBanner() {
                 </svg>
               ))}
             </span>
-            <span>UI/UX</span>
+            <span>Designs,</span>
           </span>
         
         </h1>
         </span>
         <span className='textR'>
-        <h1 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line  leading-[45px] md:leading-[3.49vw]">
-        Design studio<span className='text-[#B1FF00]'>.</span>
+        <h1 className="text-white text-[45px] md:text-[3.2vw] font-[600] uppercase line  leading-[45px] md:leading-[3.2vw]">
+        And Dominates<span className='text-[#B1FF00]'>.</span>
         </h1>
         </span>
       </div>

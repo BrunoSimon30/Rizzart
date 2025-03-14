@@ -97,15 +97,13 @@ export default function Sectwo() {
         <div className="space-y-6 px-4 md:px-14 2xl:px-0">
           <div className=" w-full py-2">
             <h2 className="gl text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line leading-[55px] md:leading-[3.49vw]">
-              Creating
-              <br /> Memorable
+            Flip The<br/>Switch go
             </h2>
           </div>
           <div className="gr  w-full py-2">
             <h2 className="text-white text-[45px] md:text-[4.271vw] font-[600] uppercase line leading-[55px] md:leading-[3.49vw] text-right">
-              Digital
-              <br />
-              Experiences
+            Full Mad<br/>Scientist<br/> Mode
+
             </h2>
           </div>
         </div>

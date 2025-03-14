@@ -4,6 +4,7 @@ import Image from "next/image";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import Link from "next/link";
 
 // ScrollTrigger ko register karein
 gsap.registerPlugin(ScrollTrigger);
@@ -14,18 +15,17 @@ export default function Blogs() {
   const blogRef = useRef(null);
 
   useGSAP(() => {
-
- gsap.to(blogRef.current, {
+    gsap.to(blogRef.current, {
       scrollTrigger: {
         trigger: blogRef.current,
-        scroller: 'body',
+        scroller: "body",
         start: "top top",
         end: "bottom top",
         pin: true,
         pinSpacing: false,
         scrub: 1,
         // markers: true,
-      }
+      },
     });
 
     const tl = gsap.timeline({
@@ -52,39 +52,38 @@ export default function Blogs() {
       },
       "run"
     )
-    .from(
-      blogRef.current?.querySelectorAll(".gl"),
-      {
-        x: -100,
-        duration: 1,
-        opacity: 0,
-        stagger: 0.4,
-        ease: "power3.out",
-      },
-      "run"
-    )
-    .from(
-      blogRef.current?.querySelectorAll(".rotate"),
-      {
-        scale: 0,
-        duration: 2,
-        stagger: 0.4,
-        ease: "bounce.out",
-      },
-      "run"
-    )
-    .from(
-      blogRef.current?.querySelectorAll(".gr"),
-      {
-        x: 100,
-        duration: 1,
-        opacity: 0,
-        stagger: 0.4,
-        ease: "power3.out",
-      },
-      "run"
-    )
-    ;
+      .from(
+        blogRef.current?.querySelectorAll(".gl"),
+        {
+          x: -100,
+          duration: 1,
+          opacity: 0,
+          stagger: 0.4,
+          ease: "power3.out",
+        },
+        "run"
+      )
+      .from(
+        blogRef.current?.querySelectorAll(".rotate"),
+        {
+          scale: 0,
+          duration: 2,
+          stagger: 0.4,
+          ease: "bounce.out",
+        },
+        "run"
+      )
+      .from(
+        blogRef.current?.querySelectorAll(".gr"),
+        {
+          x: 100,
+          duration: 1,
+          opacity: 0,
+          stagger: 0.4,
+          ease: "power3.out",
+        },
+        "run"
+      );
   }, []);
 
   return (
@@ -130,7 +129,7 @@ export default function Blogs() {
                 }`}
                 onClick={() => setActiveTab("one")}
               >
-                Blog One
+                3D animation
               </button>
               <button
                 className={`text-[18px] md:text-[4.271vw] font-[600] uppercase block transition-all duration-300 ${
@@ -140,7 +139,7 @@ export default function Blogs() {
                 }`}
                 onClick={() => setActiveTab("two")}
               >
-                Blog two
+                Content Creators
               </button>
 
               <button
@@ -151,20 +150,22 @@ export default function Blogs() {
                 }`}
                 onClick={() => setActiveTab("three")}
               >
-                Blog three
+                video production
               </button>
             </div>
           </div>
           <div className="gr col-span-2  w-full space-y-4  ">
             {/* one Content */}
             <div className="bg-[#0e0e0e] py-4 px-5 ">
-              <h1
-                className={`${
-                  activeTab === "one" ? "  text-white" : "text-[#797979]"
-                } text-[20px] md:text-[2.3vw] font-[600] uppercase transition-all duration-300`}
-              >
-                topic One
-              </h1>
+              <Link href={"/blogs"}>
+                <h1
+                  className={`${
+                    activeTab === "one" ? "  text-white" : "text-[#797979]"
+                  } text-[20px] md:text-[2.3vw] font-[600] leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
+                >
+                  7 Signs You Need High-Quality 3D Animation Services
+                </h1>
+              </Link>
               {activeTab === "one" && (
                 <motion.div
                   key="one"
@@ -174,26 +175,33 @@ export default function Blogs() {
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   <p className="text-white font-[500] md:text-[20px] md:pr-24">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
+                    Do you know—if you’re running an online business—the digital
+                    landscape is a ruthless battlefield? If so, you’re well
+                    aware of attention spans that are getting shorter,
+                    competition is ruthlessly stealing eyeballs, and businesses
+                    failing to adapt are fading into irrelevance faster than
+                    Internet Explorer....
                   </p>
-                  <div className="text-right">
-                    <button className="btn-c">read more</button>
+                  <div className="text-right py-4">
+                    <Link href={"/blogs"} className="btn-c">
+                      read more
+                    </Link>
                   </div>
                 </motion.div>
               )}
             </div>
             {/* two Content */}
             <div className="bg-[#0e0e0e] py-4 px-5">
-              <h1
-                className={`${
-                  activeTab === "two" ? "  text-white" : "text-[#797979]"
-                } text-[20px] md:text-[2.3vw] font-[600] uppercase transition-all duration-300`}
-              >
-                topic two
-              </h1>
+              <Link href={"/blogs"}>
+                <h1
+            className={`${
+              activeTab === "two" ? "  text-white" : "text-[#797979]"
+            } text-[20px] md:text-[2.3vw] font-[600] leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
+                >
+                  Agency for Content Creators
+                </h1>
+              </Link>
+
               {activeTab === "two" && (
                 <motion.div
                   key="two"
@@ -203,26 +211,33 @@ export default function Blogs() {
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   <p className="text-white font-[500] md:text-[20px] md:pr-24">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
+                    Welcome to the internet’s best-kept secret—except, it’s not
+                    a secret anymore. Because you’ve just unlocked the cheat
+                    code, if you’re reading this, to explosive content creation,
+                    brand dominance, and the kind of online presence that makes
+                    people stop, stare, and say, “Damn, I need whatever they’re
+                    having.”
                   </p>
                   <div className="text-right">
-                    <button className="btn-c">read more</button>
+                    <Link href={"/blogs"} className="btn-c">
+                      read more
+                    </Link>
                   </div>
                 </motion.div>
               )}
             </div>
             {/* three Content */}
             <div className="bg-[#0e0e0e] py-4 px-5  ">
-              <h1
-                className={`${
+              <Link href={"/blogs"}>
+                <h1
+                 className={`${
                   activeTab === "three" ? "  text-white" : "text-[#797979]"
-                } text-[20px] md:text-[2.3vw] font-[600] uppercase transition-all duration-300`}
-              >
-                topic three
-              </h1>
+                } text-[20px] md:text-[2.3vw] font-[600] leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
+                >
+                  9 Reasons High-Quality Video Production Services..
+                </h1>
+              </Link>
+
               {activeTab === "three" && (
                 <motion.div
                   key="three"
@@ -232,13 +247,17 @@ export default function Blogs() {
                   transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   <p className="text-white font-[500] md:text-[20px] md:pr-24">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur.
+                    Not investing in professional video production services
+                    means the brand is just losing the digital battle. It’s
+                    brutal out there—millions of brands (both local and global)
+                    fighting for attention, with only the strongest surviving.
+                    And guess what? Low-quality, substandard videos won’t cut
+                    it...
                   </p>
                   <div className="text-right">
-                    <button className="btn-c">read more</button>
+                    <Link href={"/blogs"} className="btn-c">
+                      read more
+                    </Link>
                   </div>
                 </motion.div>
               )}

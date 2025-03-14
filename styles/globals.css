@@ -351,6 +351,7 @@ img.arrow
   right: 0;
   margin: auto;
   z-index: -1;
+  width: 100%;
   
 }
 

@@ -18,7 +18,8 @@ export default function Home() {
     <>
     <Head>
         <title>High-Quality Design That Impress | RizzNArt</title>
-        <meta name="google-site-verification" content="" />
+        <meta name="google-site-verification" content="Vw8Mb1PQASI0J0UAhBVraLOUlo8DSoO2YjI12JqR5YM" />
+      
       </Head>
       <Header />
       <MainBanner />

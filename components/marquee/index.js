@@ -29,7 +29,7 @@ export default function Marquee() {
 
         tl.to(marqueeInner, {
             x: `-${totalWidth}px`,
-            duration: 20
+            duration: 30
         });
 
         // Scroll event listener
@@ -90,7 +90,7 @@ export default function Marquee() {
       <div className="marquee-inner flex" ref={marqueeRef}>
         {[...Array(10)].map((_, i) => (
             <div key={i} className="mrq">
-            <h1>Meet Team</h1>{" "}
+            <h1>LET’S RIZZ UP SOMETHING ICONIC!</h1>{" "}
             <Image
               src={"/img/arrow-br.svg"}
               className="arrow"

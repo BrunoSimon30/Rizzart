@@ -12,21 +12,21 @@ export default function SliderComponent() {
   const slides = [
     {
       img: "/img/sil.jpg",
-      text: "I love shooting on film, skip the morning glass of water, and still wait for my Hogwarts letter any day now.",
+      text: "Every Frame Counts—like Bitcoin Dips Before It Moons. I Craft Motion That Captivates, Informs, And Elevates Brands. ",
       name: "George Marshall",
-      job: "Web Ui/UX Designer",
+      job: "(Motion Graphic Designer)",
     },
     {
       img: "/img/sil.jpg",
-      text: "Photography is my passion, and capturing moments is my superpower!",
-      name: "Emma Watson",
-      job: "Creative Photographer",
+      text: "I Craft Binge-worthy Stories That Sell—mad Men Vibes, No Cigarette Breaks. Even Netflix Would Dm Me For A Sequel. ",
+      name: "Chris Watson",
+      job: "(Content Marketing Expert)",
     },
     {
       img: "/img/sil.jpg",
-      text: "Designing is not just about pixels; it's about emotions and experience.",
-      name: "John Doe",
-      job: "Senior UX Designer",
+      text: "From Lens To Screen, I Make Brands Cinematic, Unskippable, And Iconic—so Good, Even Spielberg Would Double-tap. ",
+      name: "Susan Crano",
+      job: "(Cinematic Content Specialist)",
     },
   ];
 
@@ -57,7 +57,7 @@ export default function SliderComponent() {
 
               {/* Content Section */}
               <div className="col-span-3 px-4 space-y-3 md:space-y-6">
-                <p className="text-white font-[500] text-[15px] md:text-[1.771vw] uppercase md:h-[210px]">
+                <p className="text-white font-[500] text-[15px] md:text-[1.771vw] uppercase ">
                   {slide.text}
                 </p>
                 <div className="flex justify-between items-center">
