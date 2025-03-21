@@ -5,7 +5,7 @@ import articles from "@/sample/blogs";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { CiCalendarDate } from "react-icons/ci";
+import { CiCalendarDate } from "react-icons/ci"; 
 
 export default function BlogsDetail() {
   const [activeSection, setActiveSection] = useState("");
