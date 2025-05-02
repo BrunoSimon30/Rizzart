@@ -1,8 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
-import { BsSend } from "react-icons/bs";
-import { RiLoaderFill } from "react-icons/ri";
+import { FaYoutube, FaLinkedin, FaInstagramSquare } from "react-icons/fa";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -98,7 +97,7 @@ export default function Footer() {
           </svg>
         </div>
         <div className="container mx-auto max-w-screen-xl md:px-14">
-          <div className="up border-2 border-black md:grid md:grid-cols-2  ">
+          {/* <div className="up border-2 border-black md:grid md:grid-cols-2  ">
             <div className="newsl py-8 px-12 bg-[#B1FF01]">
               <h2 className="text-black text-[40px] md:text-[2.385vw] font-[600] uppercase line leading-[43px] md:leading-[2.385vw]">
                 Newsletter
@@ -136,6 +135,28 @@ export default function Footer() {
               <p className="text-black font-[500] text-[23px] ">
                 We Don’t Just Talk—we Create. Hit Us Up And Let’s Make Your
                 Brand Unforgettable!
+              </p>
+            </div>
+          </div> */}
+          <div className="up border-2 border-black md:grid md:grid-cols-2">
+            <div>
+              <Image
+                src={"/img/ft-sc.jpg"}
+                alt="footer"
+                width={762}
+                height={395}
+              />
+            </div>
+            <div className="newsr space-y-4 py-8 px-8 border-t-2 md:border-l-2 md:border-t-0 border-[#292929] bg-black">
+              <h2 className="text-[#b1ff01] text-[40px] md:text-[2.385vw] font-[600] uppercase line leading-[43px] md:leading-[2.385vw]">
+                Warning!!!
+              </h2>
+              <h3 className="text-white text-[30px] md:text-[35px] font-[600] uppercase line leading-[35px] md:leading-[35px]">
+                Side Effects May Include Extreme Brand Recognition.
+              </h3>
+              <p className="text-white font-[500] text-[23px] ">
+                RizznArt blends art and strategy to create immersive visuals
+                that connect, engage, and make brands impossible to ignore.
               </p>
             </div>
           </div>
@@ -182,48 +203,75 @@ export default function Footer() {
               </div>
               <div className="ft-link space-y-2 md:space-y-8">
                 <h3 className="text-[25px] md:text-[2.229vw] text-black font-[600] uppercase tall">
-                  Useful link
+                  contact info
                 </h3>
                 <ul className="ft-lin SMN_effect-15">
                   <li>
-                    <Link href="/privacy-policy">Privacy Policy </Link>
+                    <Link href="mailto:letstalk@rizznart.com">
+                    Letstalk@rizznart.com
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/terms-and-conditions">terms & conditions</Link>
+                    <Link href="tel:+1 385-273-0071">+1 385-273-0071</Link>
                   </li>
                   <li>
-                    <Link href="/"></Link>
+                    <p className="text-black text-[18px] font-[600] pl-4">
+                    9980 South 300 West,Sandy,UT,84070
+                    </p>
                   </li>
                 </ul>
               </div>
               <div className="ft-link space-y-2 md:space-y-8">
                 <h3 className="text-[25px] md:text-[2.229vw] text-black font-[600] uppercase tall">
-                  Contact
+                  Social links
                 </h3>
-                <ul className="ft-lin SMN_effect-15">
-                  <li>
-                    <Link href="mailto:info@rizznart.com">
-                      info@rizznart.com
-                    </Link>
+                <ul className="ft-lin  ">
+                  <li className="flex items-center gap-2">
+                    <span>
+                      <FaInstagramSquare />
+                    </span>
+                    <Link href="/"> Instagram</Link>
                   </li>
-                  <li>
-                    <Link href="">instagram</Link>
+                  <li className="flex items-center gap-2">
+                    <span>
+                      <FaYoutube />
+                    </span>
+                    <Link href="/">Youtube</Link>
                   </li>
-                  <li>
-                    <div className="h-6 "></div>
+                  <li className="flex items-center gap-2">
+                    <span>
+                      <FaLinkedin />
+                    </span>
+                    <Link href="/">Linkedin</Link>
                   </li>
                 </ul>
               </div>
             </div>
           </div>
-          <div className="up  mt-12 text-center md:pl-32 ">
-            <div className="bg-black py-4 rounded px-4 md:px-32">
-              <p className="text-white text-[17px]">
-                RizznArt blends art and strategy to create immersive visuals
-                that connect, engage, and make brands impossible to ignore. (
-                <span className="text-red-500">Warning</span>: Side effects may
-                include extreme brand recognition.)
+          <div className="md:w-[80%] ml-auto up  mt-12 text-center  border-t border-[#ffffffb8] pt-4">
+            <div className="   flex justify-between items-center">
+              <p className="text-black text-[17px] font-semibold hidden md:block">
+                © 2025 Rizznart. All Rights Reserved.
               </p>
+              <ul className="   flex gap-6">
+                <li>
+                  <Link
+                    href="/privacy-policy"
+                    className="text-black text-[17px] font-semibold capitalize"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+
+                <li>
+                  <Link
+                    href="/terms-and-conditions"
+                    className="text-black text-[17px] font-semibold capitalize"
+                  >
+                    terms & conditions
+                  </Link>
+                </li>
+              </ul>
             </div>
           </div>
         </div>

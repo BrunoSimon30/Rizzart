@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { Darker_Grotesque } from "next/font/google";
 import Head from "next/head";
 import Script from "next/script"; // Import Next.js Script component
+import { useRouter } from "next/router";
 
 const grotesque = Darker_Grotesque({
   subsets: ["latin"],
@@ -12,6 +13,7 @@ const grotesque = Darker_Grotesque({
 });
 
 export default function App({ Component, pageProps }) {
+  const router = useRouter();
   useEffect(() => {
     const lenis = new Lenis({
       duration: 1.2,
@@ -34,7 +36,7 @@ export default function App({ Component, pageProps }) {
     <>
       <Head>
         <title>High-Quality Design That Impress | RizzNArt</title>
-        <link rel="canonical" href="https://rizznart.com/" />
+        <link rel="canonical" href={`https://rizznart.com${router.asPath}`} />
         <meta
           name="google-site-verification"
           content="Vw8Mb1PQASI0J0UAhBVraLOUlo8DSoO2YjI12JqR5YM"

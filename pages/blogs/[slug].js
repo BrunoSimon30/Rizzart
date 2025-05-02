@@ -1,200 +1,294 @@
 "use client";
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
-import articles from "@/sample/blogs";
-import Head from "next/head";
 import { useRouter } from "next/router";
-import React, { useState, useEffect } from "react";
-import { CiCalendarDate } from "react-icons/ci"; 
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { CiCalendarDate } from "react-icons/ci";
+import Link from "next/link";
+import Head from "next/head";
 
 export default function BlogsDetail() {
-  const [activeSection, setActiveSection] = useState("");
   const router = useRouter();
   const { slug } = router.query;
-  const [blog, setBlog] = useState(null);
+
+  const [post, setPost] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [featuredImage, setFeaturedImage] = useState(null);
+  const [tags, setTags] = useState([]);
+  const [relatedPosts, setRelatedPosts] = useState([]);
+  const [recentPosts, setRecentPosts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [authorName, setAuthorName] = useState("");
 
   useEffect(() => {
-    if (slug) {
-      const foundBlog = articles.find((b) => b.slug === slug);
-      setBlog(foundBlog);
-    }
-  }, [slug]);
+    if (!router.isReady || !slug) return;
 
-  useEffect(() => {
-    if (!blog?.sections || blog.sections.length === 0) return;
+    const fetchPost = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/posts?slug=${slug}`
+        );
+        console.log(response);
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            console.log("Active Section:", entry.target.dataset.id);
-            setActiveSection(entry.target.dataset.id);
+        if (response.data.length > 0) {
+          const postData = response.data[0];
+          setPost(postData);
+
+          if (postData.author) {
+            fetchAuthor(postData.author);
           }
-        });
-      },
-      { threshold: 0.5 } // Try changing this value (0.3, 0.7, etc.)
-    );
 
-    blog.sections.forEach((section) => {
-      const el = document.getElementById(`section-${section.id}`);
-      if (el) {
-        observer.observe(el);
-      } else {
-        console.warn("⚠️ Section not found:", section.id);
+          if (postData.featured_media) {
+            fetchFeaturedImage(postData.featured_media);
+          }
+
+          if (postData.tags.length > 0) {
+            fetchTags(postData.tags);
+          }
+
+          if (postData.categories.length > 0) {
+            fetchRelatedPosts(postData.categories, postData.id);
+            fetchCategories(postData.categories);
+          }
+        } else {
+          setError("Post not found");
+        }
+      } catch (error) {
+        setError("Failed to load post");
+      } finally {
+        setLoading(false);
       }
-    });
-
-    return () => {
-      blog.sections.forEach((section) => {
-        const el = document.getElementById(`section-${section.id}`);
-        if (el) observer.unobserve(el);
-      });
     };
-  }, [blog?.sections]);
 
-  useEffect(() => {
-    console.log("Active Section:", activeSection); // Debugging
-  }, [activeSection]);
+    const fetchAuthor = async (authorId) => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/users/${authorId}`
+        );
+        setAuthorName(response.data.name);
+      } catch (error) {
+        console.error("Failed to fetch author", error);
+      }
+    };
 
-  if (!slug) return <p className="text-white text-center">Loading...</p>;
-  if (!blog) return <p className="text-white text-center">Blog not found</p>;
+    const fetchFeaturedImage = async (mediaId) => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/media/${mediaId}`
+        );
+        setFeaturedImage(response.data.source_url);
+      } catch (error) {
+        console.error("Failed to load featured image", error);
+      }
+    };
+
+    const fetchTags = async (tagIds) => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/tags?include=${tagIds.join(
+            ","
+          )}`
+        );
+        setTags(response.data.map((tag) => tag.name));
+      } catch (error) {
+        console.error("Failed to fetch tags", error);
+      }
+    };
+
+    const fetchRelatedPosts = async (categoryIds, postId) => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/posts?categories=${categoryIds.join(
+            ","
+          )}&per_page=3&exclude=${postId}`
+        );
+        setRelatedPosts(response.data);
+      } catch (error) {
+        console.error("Failed to fetch related posts", error);
+      }
+    };
+
+    const fetchRecentPosts = async () => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/posts?per_page=5&_embed`
+        );
+
+        // Extract the featured image URL from the response
+        const postsWithImages = response.data.map((post) => ({
+          ...post,
+          featured_media:
+            post._embedded?.["wp:featuredmedia"]?.[0]?.source_url || null,
+        }));
+
+        setRecentPosts(postsWithImages);
+      } catch (error) {
+        console.error("Failed to fetch recent posts", error);
+      }
+    };
+
+    const fetchCategories = async (categoryIds) => {
+      try {
+        const response = await axios.get(
+          `https://blogs.rizznart.com/wp-json/wp/v2/categories?include=${categoryIds.join(
+            ","
+          )}`
+        );
+        setCategories(response.data);
+      } catch (error) {
+        console.error("Failed to fetch categories", error);
+      }
+    };
+
+    fetchPost();
+    fetchRecentPosts();
+  }, [slug, router.isReady]);
+
+  if (loading)
+    return <p className="text-white text-center mt-10">Loading...</p>;
+  if (error) return <p className="text-red-500 text-center mt-10">{error}</p>;
+
+  // Define the local image URLs
+  const authorImages = {
+    "Mustafa Uzair": "/img/t2.png",
+    "Ali Qureshi": "/img/t1.png",
+    "Jazib Qureshi": "/img/t3.png",
+  };
+
+  // Function to get image based on author name
+  const getAuthorImage = (authorName) => {
+    return (
+      authorImages[authorName] ||
+      "https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?..."
+    ); // fallback image
+  };
 
   return (
     <>
       <Head>
-        <title>{blog?.metaTitel}</title>
-        <meta name="description" content={blog?.metaDescription} />
+        <title>{post?.seo_title}</title>
+        <meta name="description" content={post?.seo_description} />
       </Head>
       <Header />
 
-      {/* Hero Section */}
-      <section className="innerBan-sec p-6 md:p-8">
-        <div className="h-[40vh] md:h-[80vh] bg-[url('/img/secbg1.jpg')] bg-cover bg-center bg-fixed flex items-center justify-center rounded-xl">
-          <div className="container mx-auto max-w-screen-xl">
-            <h1 className="text-white text-3xl md:text-[5vw] leading-[6vw] md:leading-[4.5vw] font-semibold   text-center px-6 md:px-12">
-              {blog?.title}
-            </h1>
-          </div>
-        </div>
-      </section>
-
-      {/* Blog Content Section */}
-      <section className="py-12 md:py-24 px-4 md:px-16 lg:px-14">
-        <div className="">
-          <div className="bg-[#0a0a0a] py-5 px-4 md:px-6 flex flex-wrap justify-between items-center gap-4 rounded-lg">
-            <div className="flex items-center gap-3">
-              <img
-                className="w-12 h-12 md:w-16 md:h-16 rounded-full ring-2 ring-white"
-                src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                alt="Author"
-              />
-              <div>
-                <h3 className="text-lg md:text-xl font-bold text-white">
-                  {blog?.author}
-                </h3>
-                <p className="text-gray-400 text-sm md:text-base">
-                  Brand Writer
-                </p>
-              </div>
+      <div>
+        <section className="innerBan-sec p-6 md:p-8">
+          <div className="h-[40vh] md:h-[80vh] bg-[url('/img/secbg1.jpg')] bg-cover bg-center bg-fixed flex items-center justify-center rounded-xl">
+            <div className="container mx-auto max-w-screen-xl">
+              <h1
+                className="text-white text-3xl md:text-[4.5vw] leading-[6vw] md:leading-[4.5vw] font-semibold text-center px-6 md:px-12"
+                dangerouslySetInnerHTML={{ __html: post.title.rendered }}
+              ></h1>
             </div>
-            <div className="flex flex-wrap gap-4">
-              <span className="text-lime-400 text-xs md:text-sm font-semibold uppercase border border-[#B1FF01] px-3 py-1 md:px-4 md:py-2 rounded-3xl">
-                {blog?.category}
-              </span>
+          </div>
+        </section>
+
+        <section className="py-12 md:py-24 px-4 md:px-16 lg:px-14">
+          <div>
+            <div className="bg-[#0a0a0a] py-5 px-4 md:px-6 flex flex-wrap justify-between items-center gap-4 rounded-lg">
+              <div className="flex items-center gap-3">
+                <img
+                  className="size-10 md:size-12 rounded-full ring-2 ring-white"
+                  src={getAuthorImage(authorName)}
+                  alt={authorName}
+                />
+                <div>
+                  <h3 className="text-base md:text-lg font-bold leading-3 text-white">
+                    {authorName}
+                  </h3>
+                  <p className="text-gray-400 text-xs md:text-sm">
+                    Brand Writer
+                  </p>
+                </div>
+              </div>
               <div className="border border-[#B1FF01] px-3 py-1 md:px-4 md:py-2 rounded-3xl flex items-center gap-2">
                 <CiCalendarDate className="text-[#B1FF01]" />
                 <span className="text-[#B1FF01] text-xs md:text-sm font-semibold uppercase">
-                  {blog?.date}
+                  {new Date(post.date).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
                 </span>
               </div>
             </div>
-          </div>
 
-          {/* Main Content */}
-          <div className="flex flex-col md:flex-row gap-8 py-12">
-            {/* Sidebar */}
-            <aside className="md:w-1/4 bg-[#0a0a0a] px-6 py-4 rounded-lg md:sticky md:top-32 md:self-start">
-  <ul className="space-y-2">
-    {(blog?.sections || []).map((section) => (
-      <li key={section.id} className="border-b border-[#494949] pb-2">
-        <a
-          href={`#section-${section.id}`}
-          onClick={(e) => {
-            e.preventDefault();
-            const sectionElement = document.getElementById(`section-${section.id}`);
-            if (sectionElement) {
-              sectionElement.scrollIntoView({ behavior: "smooth", block: "start" });
-              setActiveSection(section.id.toString()); // Manually set active section
-            }
-          }}
-          className={`block font-semibold text-sm md:text-[19px] transition-colors duration-300 ${
-            activeSection?.toString() === section.id.toString()
-              ? "text-lime-400 font-bold"
-              : "text-gray-400"
-          } hover:text-lime-300`}
-        >
-          {section.title}
-        </a>
-      </li>
-    ))}
-  </ul>
-</aside>
-
-            {/* Blog Content */}
-            <div className="md:w-3/4 bg-[#0a0a0a] p-6 md:p-10 rounded-lg space-y-12">
-              <div>
-                <img
-                  src={blog?.image}
-                  alt={blog?.title}
-                  className="w-full rounded-lg mb-4"
-                />
-                <div className="bg-[#B1FF00] px-4 py-8  rounded-3xl">
-                  <h2 className="text-black text-xl md:text-[35px] leading-[40px] font-semibold pb-3">
-                    {blog?.title}
-                  </h2>
-                  <ul className="space-y-3">
-                    {blog?.descriptionArr?.map((e, i) => (
-                      <li key={i}>
-                        <p className="text-black text-sm font-[500] md:text-[22px] md:leading-[24px]">
-                          {e.para}
-                        </p>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-              {blog?.sections?.map((section) => (
+            <div className="flex flex-col md:flex-row gap-8 py-12">
+              <div className="md:w-3/4 bg-[#0a0a0a] text-white p-6 md:p-10 rounded-lg space-y-2">
+                {featuredImage && (
+                  <img
+                    src={featuredImage}
+                    alt="Featured"
+                    className="w-full h-[900px] rounded-lg mb-4 object-cover"
+                  />
+                )}
+                <h1 className="text-[40px] font-bold">{post.title.rendered}</h1>
                 <div
-                  key={section.id}
-                  id={`section-${section.id}`}
-                  data-id={section.id}
-                >
-                  {section.image && ( // Image sirf tab show hogi jab available hogi
-                    <img
-                      src={section.image}
-                      alt={section.title}
-                      className="w-full rounded-lg mb-4"
-                    />
-                  )}
-                  <h2 className="text-white text-xl md:text-[35px] font-semibold pb-3">
-                    {section.title}
-                  </h2>
-                  <ul className="space-y-3">
-                    {(Array.isArray(section?.content)
-                      ? section.content
-                      : []
-                    ).map((e, i) => (
-                      <li key={i}>
-                        <div dangerouslySetInnerHTML={{ __html: e.para }} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+                  className="blogwrap "
+                  dangerouslySetInnerHTML={{ __html: post.content.rendered }}
+                ></div>
+              </div>
+              <aside className="md:w-1/4 bg-[#0a0a0a] px-6 py-4 rounded-lg md:sticky md:top-28 md:self-start">
+                <h2 className="text-white text-lg font-bold mb-4">Tags</h2>
+                <ul className="flex flex-wrap gap-2">
+                  {tags.map((tag, index) => (
+                    <li key={index}>
+                      <div className="border border-[#B1FF01] px-3 py-1 md:px-4 md:py-2 rounded-3xl flex items-center gap-2">
+                        <span className="text-[#B1FF01] text-xs md:text-sm font-semibold capitalize">
+                          {tag}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+
+                <h2 className="text-white text-lg font-bold mt-6 mb-4">
+                  Recent Posts
+                </h2>
+                <ul className="space-y-4">
+                  {recentPosts.map((post) => (
+                    <li key={post.id} className="flex items-center gap-4">
+                      {post.featured_media && (
+                        <img
+                          src={post.featured_media}
+                          alt="Post Thumbnail"
+                          className="w-16 h-16 rounded-lg object-cover"
+                        />
+                      )}
+                      <Link
+                        href={`/blogs/${post.slug}`}
+                        className="text-[#B1FF01] no-underline"
+                      >
+                        {post.title.rendered.length > 50
+                          ? `${post.title.rendered.substring(0, 50)}...`
+                          : post.title.rendered}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <h2 className="text-white text-lg font-bold mt-6 mb-4">
+                  Categories
+                </h2>
+                <ul className="space-y-2 inline-flex items-center gap-2">
+                  {categories.map((category) => (
+                    <li key={category.id} className="text-gray-400">
+                       <div className="border border-[#B1FF01] px-3 py-1 md:px-4 md:py-2 rounded-3xl flex items-center gap-2">
+                        <span className="text-[#B1FF01] text-xs md:text-sm font-semibold capitalize">
+                        {category.name}
+                        </span>
+                      </div>
+                      
+                    </li>
+                  ))}
+                </ul>
+              </aside>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </div>
       <Footer />
     </>
   );

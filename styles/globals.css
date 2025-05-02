@@ -147,7 +147,7 @@ header {
 .btn-c
 {
 background-color: #B1FF01;
-  padding: 8px 30px;
+  padding: 8px 25px;
   border-radius: 30px;
   position: relative;
   overflow: hidden;
@@ -157,7 +157,7 @@ background-color: #B1FF01;
   font-weight: 700;
   z-index: 1;
   transition: 0.3s;
-
+ 
 }
 .btn-c::after
 {
@@ -432,13 +432,42 @@ section.sec-two {
   
 }
 
+.blogwrap h2 {
+  font-size: 40px;
+  padding: 10px 0;
+  font-weight: 600;
+  line-height: 38px;
+}
+.blogwrap p {
+  font-size: 24px;
+  padding: 10px 0;
+  font-weight: 500;
+}
+.blogwrap figure img {
+  width: 535px;
+  height: 400px;
+  border-radius: 19px;
+  margin: auto;
+  object-fit: cover;
+}
 
-
-
-
-
-
-
+.blogwrap figure {
+  padding: 20px 0;
+  text-align: center;
+}
+.blogwrap a{
+  color: #B1FF01;
+  font-weight: 600;
+}
+.blogwrap ul {
+  list-style: disc;
+  padding-left: 30px;
+}
+.blogwrap ul li{
+  font-size: 24px;
+  padding: 10px 0;
+  font-weight: 500;
+}
 
 /* media Q */
 @media (max-width: 1440px)
@@ -464,8 +493,15 @@ section.sec-two {
   scale: 1.2;
 }
 }
+ 
 @media (max-width: 768px)
 {
+  .sec-two br{
+    display: block;
+  }
+  br{
+    display: none;
+  }
   .rotate
   {
     display: none;

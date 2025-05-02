@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from '@gsap/react';
  import { ScrollTrigger } from "gsap/ScrollTrigger";
+import Link from 'next/link';
  
 // ScrollTrigger ko register karein
 gsap.registerPlugin(ScrollTrigger);
@@ -90,7 +91,7 @@ export default function MainBanner() {
         </span>
       </div>
       <div className='btn-ani hidden md:block' ref={btnRef}>
-        <button className="btn-a uppercase">
+        <Link href={'#contact'} className="btn-a uppercase">
           <span>
             <svg
              className='w-[1.667vw] '
@@ -105,7 +106,7 @@ export default function MainBanner() {
             </svg>
           </span>{" "}
           contact
-        </button>
+        </Link>
       </div>
     </div>
   </section>

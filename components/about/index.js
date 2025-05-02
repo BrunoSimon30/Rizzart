@@ -3,7 +3,8 @@ import { React, useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
+import Link from "next/link";
+import { MdArrowRightAlt } from "react-icons/md";
 // ScrollTrigger ko register karein
 gsap.registerPlugin(ScrollTrigger);
 
@@ -148,7 +149,7 @@ export default function About() {
               <div className="md:col-span-3  w-full py-2">
                 <h2
                   ref={headingRef}
-                  className="overflow-hidden   text-white text-[40px]  md:text-[4vw]  font-[600]   uppercase leading-[50px] md:leading-[4.5vw] mb-24"
+                  className="overflow-hidden   text-white text-[30px]  md:text-[4vw]  font-[600]   uppercase leading-[50px] md:leading-[4.5vw] mb-12"
                 >
                   Glitch The Ordinary
                   <br />
@@ -162,18 +163,30 @@ export default function About() {
                     </svg>
                   </span>
                   With No Speed
-                  <br /> Limit
-                  Visuals<span className="inline-block w-[20px] md:w-[2.3vw] mx-3 ">
+                  <br /> Limit Visuals
+                  <span className="inline-block w-[20px] md:w-[2.3vw] mx-3 ">
                     <svg viewBox="0 0 50 73" fill="none">
                       <path
                         d="M26.9707 0.594299L26.9707 25.7614H49.8377L25.2021 72.1569L25.2021 51.9631H0.0493164L26.9707 0.594299Z"
                         fill="#fff"
                       />
                     </svg>
-                  </span>So
+                  </span>
+                  So
                   <br />
                   Wild, Even Your Brain Buffered.
                 </h2>
+                <div>
+                  <Link
+                    href={"#contact"}
+                    className="btn-c inline-flex items-center gap-2"
+                  >
+                    <p>contact us</p>
+                    <span className=" text-[20px]  pt-1">
+                      <MdArrowRightAlt />
+                    </span>
+                  </Link>
+                </div>
               </div>
               <div className="md:col-span-2 relative  w-full py-2 px-8   hidden md:block">
                 <div className="arcde-ab  ">

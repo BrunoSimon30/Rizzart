@@ -80,7 +80,7 @@ export default function Sectwo() {
   return (
     <section
       ref={SecWrap}
-      className="sec-two h-screen bg-[url('/img/secbg1.jpg')] py-12 flex items-center justify-center bg-fixed bg-center relative"
+      className="sec-two h-screen bg-[url('/img/secbg1.jpg')] py-12 flex items-center justify-center bg-fixed bg-center relative overflow-hidden"
     >
       <div className="sub">
         <div className="lcurr w-1/2  m-auto  lg:w-fit  py-24">

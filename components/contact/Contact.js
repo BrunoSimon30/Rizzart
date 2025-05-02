@@ -4,6 +4,8 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { IoCallOutline } from "react-icons/io5";
+import Link from "next/link";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -70,7 +72,8 @@ export default function Contact() {
               <h2 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
                 Get in Touch
               </h2>
-              <div className="flex pb-2 gap-4">
+             <div className="flex gap-4 items-end">
+             <div className="flex pb-2 gap-4 items-end">
                 <span className="w-[30px] h-[30px]">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 56 56" fill="none">
                     <path d="M28 0.000488281L30.3286 17.0452L39.3886 2.42122L34.5832 18.9395L48.8081 9.26483L37.6995 22.4005L54.6296 19.348L39.1386 26.8298L55.8466 30.9273L38.6518 31.4615L52.2487 42.0005L36.3232 35.4948L44.458 50.653L32.5555 38.2322L33.8215 55.3886L28 39.2005L22.1785 55.3886L23.4445 38.2322L11.542 50.653L19.6768 35.4948L3.75129 42.0005L17.3482 31.4615L0.153387 30.9273L16.8614 26.8298L1.37042 19.348L18.3005 22.4005L7.19194 9.26483L21.4168 18.9395L16.6114 2.42122L25.6714 17.0452L28 0.000488281Z" fill="#B1FF00" />
@@ -78,6 +81,13 @@ export default function Contact() {
                 </span>
                 <h2 className="text-[#F1FFC4;] uppercase">Fill out the form</h2>
               </div>
+              <div className="flex pb-2 gap-4 ">
+                <span className=" text-[#B1FF01] text-[20px]">
+                <IoCallOutline />
+                </span>
+                <Link href={'tel:+1 385-273-0071'} className="text-[#F1FFC4;] uppercase">+1 385-273-0071</Link>
+              </div>
+             </div>
               <div className="conf md:w-[70%]">
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
@@ -115,6 +125,7 @@ export default function Contact() {
             <div className="con-r text-center hidden md:block">
               <div className="con-i">
                 <Image className="mx-auto" src="/img/game.png" width={350} height={800} alt="arrow" />
+               
               </div>
             </div>
           </div>

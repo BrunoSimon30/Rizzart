@@ -3,7 +3,8 @@ import { React, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-
+import Link from "next/link";
+import { MdArrowRightAlt } from "react-icons/md";
 export default function Secthree() {
   const SecWrap = useRef(null);
 
@@ -81,13 +82,21 @@ export default function Secthree() {
                 On Fire!
               </h2>
             </div>
-            <div className="gr  w-full md:py-2 md:px-8 pl-0 lg:pl-32">
+            <div className="gr  w-full md:py-2 md:px-8 pl-0 lg:pl-32 space-y-8">
               <p className="text-[20px] md:text-[25px] font-[600] ">
                 Rizznart bends reality and reprograms attention spans. Our
                 cinematic visuals and motion graphics make audiences stop,
                 watch, and engage. In a world of endless scrolling, we make your
                 brand impossible to ignore.
               </p>
+              <div>
+                          <Link href={"#contact"} className="btn-c inline-flex items-center gap-2">
+                            <p>contact us</p>
+                            <span className=" text-[20px]  pt-1">
+                              <MdArrowRightAlt />
+                            </span>
+                          </Link>
+                        </div>
             </div>
           </div>
         </div>

@@ -87,7 +87,7 @@ export default function Blogs() {
   }, []);
 
   return (
-    <section ref={blogRef} id="blogs" className="blog-sec  md:h-screen py-20 ">
+    <section ref={blogRef} id="blogs" className="blog-sec  md:h-screen py-20 overflow-hidden">
       <div className="px-8 md:px-16 space-y-4">
         <div className="b-h flex items-center gap-4 overflow-hidden pt-2">
           <h2 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
@@ -161,7 +161,7 @@ export default function Blogs() {
                 <h1
                   className={`${
                     activeTab === "one" ? "  text-white" : "text-[#797979]"
-                  } text-[20px] md:text-[2.3vw] font-[600] leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
+                  } text-[20px] md:text-[2.3vw] font-[600] md:leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
                 >
                   7 Signs You Need High-Quality 3D Animation Services
                 </h1>
@@ -232,7 +232,7 @@ export default function Blogs() {
                 <h1
                  className={`${
                   activeTab === "three" ? "  text-white" : "text-[#797979]"
-                } text-[20px] md:text-[2.3vw] font-[600] leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
+                } text-[20px] md:text-[2.3vw] font-[600] md:leading-[2.3vw] uppercase transition-all duration-300 pb-2`}
                 >
                   9 Reasons High-Quality Video Production Services..
                 </h1>
