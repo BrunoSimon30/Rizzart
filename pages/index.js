@@ -18,10 +18,16 @@ import Link from "next/link";
 export default function Home() {
   return (
     <>
-    <Head>
+      <Head>
         <title>High-Quality Design That Impress | RizzNArt</title>
-        <meta name="google-site-verification" content="Vw8Mb1PQASI0J0UAhBVraLOUlo8DSoO2YjI12JqR5YM" />
-      
+        <meta
+          name="description"
+          content="Rizznart delivers creative branding services and high-quality design that impress to boost your brand’s impact and visual appeal."
+        />
+        <meta
+          name="google-site-verification"
+          content="Vw8Mb1PQASI0J0UAhBVraLOUlo8DSoO2YjI12JqR5YM"
+        />
       </Head>
       <Header />
       <MainBanner />
@@ -29,12 +35,11 @@ export default function Home() {
       <Secthree />
       <About />
       <Blogs />
-      <Marquee/>
+      <Marquee />
       <Team />
-      <Teamsec/>
-      {/* <Pricing/> */}
+      <Teamsec />
       <OurWork />
-      <Contact/>
+      <Contact />
       <Footer />
     </>
   );
