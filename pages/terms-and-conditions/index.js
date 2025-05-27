@@ -7,7 +7,7 @@ const termsData = [
   {
     id: "your-agreement",
     content: `
-    <h2 class="text-[#FFA100] text-[30px] uppercase font-semibold">Terms & Conditions</h2>
+    <h1 class="text-[#FFA100] text-[30px] uppercase font-semibold">Terms & Conditions</h1>
     <p class="text-white text-[20px]">Welcome to Rizznart! The below Terms & Conditions lay out the legal framework of working with us, whether you're a brand, an influencer, a creative collaborator, or just someone curious about our high-energy world of content creation. By using our website, services, or collaborating with us in any way, you’re agreeing to these terms—so read them carefully. If you don’t agree, we totally respect that, but it means we can’t work together.</p>
 
     <h2 class="text-[#FFA100] text-[30px] uppercase font-semibold">1. Who We Are & What We Do</h2>
@@ -63,9 +63,9 @@ export default function TermsConditions() {
       <Header />
       <section className="innerBan-sec p-8  ">
         <div className="h-[40vh] md:h-[80vh] bg-[url('/img/secbg1.jpg')] py-12 flex items-center justify-center bg-fixed bg-center relative rounded-xl">
-          <h2 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
+          <h1 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
             Terms & Conditions
-          </h2>
+          </h1>
         </div>
       </section>
       <section className="term-sec py-32 px-6 xl:px-0">
