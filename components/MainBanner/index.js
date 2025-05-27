@@ -54,8 +54,7 @@ export default function MainBanner() {
           <source src="/img/rizzvid.webm" />
         </video>
     <div className="w-full md:flex  items-end  justify-between px-6 md:px-16  pb-20 lg:pb-8">
-      <h1>
-        <div className="textR-wrap"  ref={textRef}>
+      <div className="textR-wrap"  ref={textRef}>
       <span className='textR'>
         <h1 className="text-white text-[45px] md:text-[3.2vw] font-[600] uppercase line  leading-[45px] md:leading-[3.2vw]">
         Rizznart Disrupts
@@ -91,7 +90,6 @@ export default function MainBanner() {
         </h1>
         </span>
       </div>
-      </h1>
       <div className='btn-ani hidden md:block' ref={btnRef}>
         <Link href={'#contact'} className="btn-a uppercase">
           <span>

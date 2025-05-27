@@ -91,7 +91,7 @@ export default function Teamsec() {
               height={535} />
               <div>
                 <h4 className="text-white text-[30px] leading-[30px] md:text-[45px] md:leading-[45px] font-semibold ">Mustafa Uzair</h4>
-                <h5 className='text-[#BABABA] text-[20px] leading-[25px] md:text-[25px] md:leading-[30px]'>(Marketing)</h5>
+                <h5 className='text-[#BABABA] text-[20px] leading-[25px] md:text-[25px] md:leading-[30px]'>(Marketting)</h5>
               </div>
         </div>
         <div className="teamn-bx space-y-4">

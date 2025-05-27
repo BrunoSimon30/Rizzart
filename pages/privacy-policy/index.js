@@ -7,7 +7,7 @@ const termsData = [
   {
     id: "your-agreement",
     content: `
-    <h1 class="text-[#FFA100] text-[30px] uppercase font-semibold">Privacy Policy</h1>
+    <h2 class="text-[#FFA100] text-[30px] uppercase font-semibold">Privacy Policy</h2>
     <p class="text-white text-[20px]">At Rizznart, we take your privacy seriously. This Privacy Policy explains how we collect, use, store, and protect your information when you interact with our website, services, or contact us. By using our services, you’re agreeing to this policy—so let’s break it down in a way that actually makes sense.</p>
 
     <h2 class="text-[#FFA100] text-[30px] uppercase font-semibold">1. Information We Collect</h2>
@@ -86,9 +86,9 @@ export default function Privacy() {
       <Header />
       <section className="innerBan-sec p-8  ">
         <div className="h-[40vh] md:h-[80vh] bg-[url('/img/secbg1.jpg')] py-12 flex items-center justify-center bg-fixed bg-center relative rounded-xl">
-          <h1 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
+          <h2 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
             Privacy Policy
-          </h1>
+          </h2>
         </div>
       </section>
       <section className="term-sec py-32 px-6 xl:px-0">
