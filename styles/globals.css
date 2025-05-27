@@ -515,3 +515,44 @@ section.sec-two {
     scale: 4;
   }
 }
+
+
+
+
+
+/* ====== */
+.roundedText
+ {
+    animation: 20s linear infinite rotatory;
+}
+@keyframes rotatory {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.dan-warp {
+     left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+    height: 158px;
+    position: absolute;
+    background-size: cover;
+    background-repeat: repeat-x;
+    animation: cityMoving 60s linear 0s infinite;
+    background-image: url('/img/line-bg-back.png');
+}
+@keyframes cityMoving {
+  0% {
+    background-position: 10000% 100%;
+  }
+
+  100% {
+    background-position: 0% 100%;
+  }
+}
