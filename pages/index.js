@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MainBanner from "@/components/MainBanner";
 import Marquee from "@/components/marquee";
+import Arcade from "@/components/Model/Arcade";
 import Pricing from "@/components/Pricing";
 import Secthree from "@/components/secthree";
 import Sectwo from "@/components/sectwo";
@@ -30,8 +31,10 @@ export default function Home() {
         />
       </Head>
       <Header />
-      <MainBanner />
-      <Sectwo />
+      <Arcade/>
+   
+      {/* <MainBanner /> */}
+      {/* <Sectwo /> */}
       <Secthree />
       <About />
       <Blogs />

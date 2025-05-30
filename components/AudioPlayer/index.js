@@ -163,7 +163,7 @@ useGSAP(() => {
 
       {entered && (
         <div>
-          <div className="p-6 text-white">🎉 Your site is now visible!</div>
+          {/* <div className="p-6 text-white">🎉 Your site is now visible!</div> */}
 
           <div
             onClick={togglePlay}
