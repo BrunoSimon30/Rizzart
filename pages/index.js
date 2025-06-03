@@ -33,8 +33,8 @@ export default function Home() {
       <Header />
       <Arcade/>
    
-      {/* <MainBanner /> */}
-      {/* <Sectwo /> */}
+      {/* <MainBanner />
+      <Sectwo /> */}
       <Secthree />
       <About />
       <Blogs />

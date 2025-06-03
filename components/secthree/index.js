@@ -60,9 +60,9 @@ export default function Secthree() {
     <>
       <section
         ref={SecWrap}
-        className="sec-three h-screen py-12 flex items-center justify-center relative bg-fixed  relative  bg-[url('/img/secbg.png')] bg-cover bg-center before:absolute before:-z-10  before:inset-0 before:bg-[#B1FF01]/50"
+        className="sec-three h-screen py-12 flex items-center justify-center relative bg-fixed    bg-cover bg-center before:absolute before:-z-10  before:inset-0 before:bg-[#B1FF01]/50"
       >
-        <div className="sub ">
+        {/* <div className="sub ">
           <div className="lcurr w-1/2 m-auto lg:w-fit">
             <Image
               src="/img/sub2.png"
@@ -72,17 +72,18 @@ export default function Secthree() {
               alt="arrow"
             />
           </div>
-        </div>
+        </div> */}
         <div className="container mx-auto max-w-screen-xl px-4 md:px-14 2xl:px-0">
-          <div className="md:grid md:grid-cols-2 gap-8 items-center">
+          <div className="md:grid md:grid-cols-3 gap-8 items-center">
             <div className="  w-full py-2">
-              <h2 className="gl text-black text-[45px] md:text-[5.208vw]  uppercase tall">
-                It's Time&nbsp; To<br/> Set The &nbsp; Internet
-                <br />
+               
+            </div>
+            <div className="col-span-2 gr  w-full md:py-2 md:px-8 pl-0 lg:pl-32 space-y-4">
+               <h2 className="gl text-black text-[45px]   uppercase tall">
+                It's Time&nbsp; To  Set The &nbsp; Internet
+                
                 On Fire!
               </h2>
-            </div>
-            <div className="gr  w-full md:py-2 md:px-8 pl-0 lg:pl-32 space-y-8">
               <p className="text-[20px] md:text-[25px] font-[600] ">
                 Rizznart bends reality and reprograms attention spans. Our
                 cinematic visuals and motion graphics make audiences stop,

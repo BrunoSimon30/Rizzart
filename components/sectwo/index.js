@@ -16,10 +16,9 @@ export default function Sectwo() {
         trigger: SecWrap.current,
         start: "top", // Jab section viewport ke 80% pe aaye
         end: "bottom",
-        // markers:true,
+    
         pin: true,
-        // scrub: 4,
-        // toggleActions: "play pause resume reset",
+        
         toggleActions: "play none none reverse",
       },
     });
@@ -54,16 +53,7 @@ export default function Sectwo() {
         },
         "run"
       )
-      // .from(
-      //   SecWrap.current?.querySelectorAll(".lcurr"),
-      //   {
-      //     scale: 0,
-      //     duration: 2,
-      //     stagger: 0.4,
-      //     ease: "bounce.out",
-      //   },
-      //   "run"
-      // )
+  
       .from(
         SecWrap.current?.querySelectorAll(".gr"),
         {
