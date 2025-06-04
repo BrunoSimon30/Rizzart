@@ -14,80 +14,70 @@ export default function Blogs() {
 
   const blogRef = useRef(null);
 
-  useGSAP(() => {
-    gsap.to(blogRef.current, {
-      scrollTrigger: {
-        trigger: blogRef.current,
-        scroller: "body",
-        start: "top top",
-        end: "bottom top",
-        pin: true,
-        pinSpacing: false,
-        scrub: 1,
-        // markers: true,
-      },
-    });
+  // useGSAP(() => {
+    
+ 
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: blogRef.current,
-        start: "top 20%", // Jab section viewport ke 80% pe aaye
-        end: "bottom 50%",
-        // markers: true,
-        // pin: true,
-        // scrub: 4,
-        // toggleActions: "play pause resume reset",
-        toggleActions: "play none none reverse",
-      },
-    });
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: blogRef.current,
+  //        start: "top bottom",
+  //       end: "bottom top",
+  //     markers: true,
+  //       // pin: true,
+  //       // scrub: 4,
+  //       // toggleActions: "play pause resume reset",
+  //       // toggleActions: "play none none reverse",
+  //     },
+  //   });
 
-    tl.from(
-      blogRef.current?.querySelectorAll(".up"),
-      {
-        y: 100,
-        duration: 1,
-        opacity: 0,
-        stagger: 0.4,
-        ease: "power3.out",
-      },
-      "run"
-    )
-      .from(
-        blogRef.current?.querySelectorAll(".gl"),
-        {
-          x: -100,
-          duration: 1,
-          opacity: 0,
-          stagger: 0.4,
-          ease: "power3.out",
-        },
-        "run"
-      )
-      .from(
-        blogRef.current?.querySelectorAll(".rotate"),
-        {
-          scale: 0,
-          duration: 2,
-          stagger: 0.4,
-          ease: "bounce.out",
-        },
-        "run"
-      )
-      .from(
-        blogRef.current?.querySelectorAll(".gr"),
-        {
-          x: 100,
-          duration: 1,
-          opacity: 0,
-          stagger: 0.4,
-          ease: "power3.out",
-        },
-        "run"
-      );
-  }, []);
+  //   tl.from(
+  //     blogRef.current?.querySelectorAll(".up"),
+  //     {
+  //       y: 100,
+  //       duration: 1,
+  //       opacity: 0,
+  //       stagger: 0.4,
+  //       ease: "power3.out",
+  //     },
+  //     "run"
+  //   )
+  //     .from(
+  //       blogRef.current?.querySelectorAll(".gl"),
+  //       {
+  //         x: -100,
+  //         duration: 1,
+  //         opacity: 0,
+  //         stagger: 0.4,
+  //         ease: "power3.out",
+  //       },
+  //       "run"
+  //     )
+  //     .from(
+  //       blogRef.current?.querySelectorAll(".rotate"),
+  //       {
+  //         scale: 0,
+  //         duration: 2,
+  //         stagger: 0.4,
+  //         ease: "bounce.out",
+  //       },
+  //       "run"
+  //     )
+  //     .from(
+  //       blogRef.current?.querySelectorAll(".gr"),
+  //       {
+  //         x: 100,
+  //         duration: 1,
+  //         opacity: 0,
+  //         stagger: 0.4,
+  //         ease: "power3.out",
+  //       },
+  //       "run"
+  //     );
+  // }, []);
 
   return (
-    <section ref={blogRef} id="blogs" className="blog-sec  md:h-screen py-20 overflow-hidden">
+    <section ref={blogRef} id="blogs" className="ourblog-sec  md:h-screen py-20 overflow-hidden  relative z-20">
       <div className="px-8 md:px-16 space-y-4">
         <div className="b-h flex items-center gap-4 overflow-hidden pt-2">
           <h2 className="up text-[#B1FF01] text-[40px] md:text-[4.271vw] font-[600] uppercase  tall">
@@ -112,7 +102,7 @@ export default function Blogs() {
         </div>
         <div className="md:grid md:grid-cols-5 gap-8">
           <div className="col-span-3  w-full  relative">
-            <div className="rotate">
+            <div className="rotate opacity-0">
               <Image src="/img/360.gif" width={500} height={500} alt="arrow" />
             </div>
             <h2 className=" gl text-[#F1FFC4] uppercase text-[23px] font-semibold leading-[21px] ">

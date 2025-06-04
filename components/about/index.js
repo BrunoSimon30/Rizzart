@@ -10,27 +10,10 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function About() {
   const aboutRed = useRef(null);
-
+  const topheadingRef = useRef(null);
   const headingRef = useRef(null);
 
   useGSAP(() => {
-    if (headingRef.current) {
-      // Sare children nodes nikal lo
-      const nodes = Array.from(headingRef.current.childNodes);
-
-      nodes.forEach((node) => {
-        // Agar yeh text node hai, toh uske words wrap kar do
-        if (node.nodeType === Node.TEXT_NODE) {
-          const words = node.textContent
-            .split(" ")
-            .map((word) => `<span class="word">${word}</span>`)
-            .join(" ");
-          const spanWrapper = document.createElement("span");
-          spanWrapper.innerHTML = words;
-          node.replaceWith(...spanWrapper.childNodes);
-        }
-      });
-    }
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: aboutRed.current,
@@ -40,33 +23,37 @@ export default function About() {
         // pin: true,
         // scrub: 4,
         // toggleActions: "play pause resume reset",
-        toggleActions: "play none none reverse",
+        // toggleActions: "play none none reverse",
+        start: "top top",
+        end: "bottom top",
+        pin: true,
+        scrub: true,
       },
     });
 
     tl.from(
-      aboutRed.current?.querySelectorAll(".gl h2 , .gl svg"),
+      topheadingRef.current?.querySelectorAll(".gl h2 , .gl svg"),
       {
         y: 100,
         duration: 1,
         opacity: 0,
-        stagger: 0.4,
+
         ease: "power3.out",
       },
       "run"
     )
-
       .from(
-        headingRef.current?.querySelectorAll("span"),
+        headingRef.current?.querySelectorAll("h2 "),
         {
           y: 100,
-          duration: 0.2,
+          duration: 1,
           opacity: 0,
-          stagger: 0.2,
-          ease: "power1.out",
+          stagger: 0.4,
+          ease: "power3.out",
         },
         "run"
       )
+
       .from(
         aboutRed.current?.querySelectorAll(".arcde-ab"),
         {
@@ -86,9 +73,12 @@ export default function About() {
         id="about"
         className="about-sec  h-screen p-6 flex items-center  "
       >
-        <div className="bg-[url('/img/frame.png')] rounded-2xl py-16 mt-6">
+        <div className="bg-[url('/img/frame.png')] rounded-2xl py-16 mt-6  ">
           <div className="px-6 md:px-14 space-y-12">
-            <div className="flex justify-between w-full items-center">
+            <div
+              className="flex justify-between w-full items-center"
+              ref={topheadingRef}
+            >
               <div className="gl overflow-hidden">
                 <h2 className="text-[#F1FFC4] uppercase text-[23px] font-semibold leading-[21px]">
                   RizzNArt
@@ -146,11 +136,8 @@ export default function About() {
               </div>
             </div>
             <div className="md:grid md:grid-cols-5 gap-8">
-              <div className="md:col-span-3  w-full py-2">
-                <h2
-                  ref={headingRef}
-                  className="overflow-hidden   text-white text-[30px]  md:text-[4vw]  font-[600]   uppercase leading-[50px] md:leading-[4.5vw] mb-12"
-                >
+              <div className="md:col-span-3  w-full py-2" ref={headingRef}>
+                <h2 className="overflow-hidden   text-white text-[30px]  md:text-[4vw]  font-[600]   uppercase leading-[50px] md:leading-[4.5vw] mb-12">
                   Glitch The Ordinary
                   <br />
                   Design
@@ -189,7 +176,7 @@ export default function About() {
                 </div>
               </div>
               <div className="md:col-span-2 relative  w-full py-2 px-8   hidden md:block">
-                <div className="arcde-ab  ">
+                <div className="arcde-ab  opacity-0">
                   <Image
                     src="/img/game.png"
                     width={350}

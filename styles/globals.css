@@ -563,7 +563,7 @@ span.word
 }
 
   .can-sec{
-    z-index: -1;
+    z-index: 1;
   }
    
   .sec-two {
@@ -575,6 +575,19 @@ span.word
    position: absolute;
   content: '';
   background-image: url('/img/secbg1.jpg');
+   width: 100%;
+  height: 100%;
+  z-index: -3;
+}
+   .sec-three {
+  position: relative;
+  z-index: -2;
+  padding: 100px 0;
+}
+.sec-three:before{
+   position: absolute;
+  content: '';
+  background-image: url('/img/secbg2.jpg');
    width: 100%;
   height: 100%;
   z-index: -3;

@@ -5,16 +5,17 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import MainBanner from "@/components/MainBanner";
 import Marquee from "@/components/marquee";
-import Arcade from "@/components/Model/Arcade";
+ 
+import Experience from "@/components/Model/Experience";
 import Pricing from "@/components/Pricing";
 import Secthree from "@/components/secthree";
 import Sectwo from "@/components/sectwo";
 import Team from "@/components/Team";
 import Teamsec from "@/components/Teamsec";
 import OurWork from "@/components/work";
+import { Canvas } from "@react-three/fiber";
 import Head from "next/head";
-import Image from "next/image";
-import Link from "next/link";
+ 
 
 export default function Home() {
   return (
@@ -31,19 +32,23 @@ export default function Home() {
         />
       </Head>
       <Header />
-      <Arcade/>
-   
-      {/* <MainBanner />
-      <Sectwo /> */}
+      <section className="can-sec fixed top-0 h-screen w-full">
+        <Canvas>
+          <Experience />
+        </Canvas>
+      </section>
+
+      <MainBanner />
+      <Sectwo />
       <Secthree />
       <About />
       <Blogs />
-      <Marquee />
+      {/* <Marquee />
       <Team />
       <Teamsec />
       <OurWork />
       <Contact />
-      <Footer />
+      <Footer /> */}
     </>
   );
 }

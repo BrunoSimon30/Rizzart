@@ -1,11 +1,18 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useMemo } from "react";
 import { useGLTF, useVideoTexture } from "@react-three/drei";
-import { useControls } from "leva";
+ 
 import * as THREE from "three";
 
 export default function OurModel(props) {
   const { nodes, materials } = useGLTF("./img/game.glb");
   const [videoAspectRatio, setVideoAspectRatio] = useState(16/9);
+
+  // Defensive check for required data
+  if (!materials["Material.006"] || !nodes.Object_21) return null;
+
+  
+
+
   
   // Create video texture
   const videoTexture = useVideoTexture("./img/rizzvid.webm", {
@@ -16,20 +23,17 @@ export default function OurModel(props) {
     start: true
   });
 
-  // Optimized controls with your perfect values
-  // const { useVideo } = useControls("Video Texture Settings", {
-  //   useVideo: true
-  // });
+  
 
   // Your perfect scaling and positioning values
-  const scaleX = 5.0;
+ const scaleX = 5.0;
   const scaleY = 5.0;
   const offsetX = 0.30;
   const offsetY = 0;
   const rotation = 0;
 
   // Clone the original material and apply video texture
-  const screenMaterial = materials["Material.006"].clone();
+ const screenMaterial = useMemo(() => materials["Material.006"].clone(), [materials]);
   
   // Calculate mesh UV bounds to understand the surface
   useEffect(() => {
@@ -107,7 +111,7 @@ export default function OurModel(props) {
       screenMaterial.map = materials["Material.006"].map;
       screenMaterial.needsUpdate = true;
     }
-  }, [ videoTexture, screenMaterial, materials]);
+  }, [ videoTexture, materials]);
 
   return (
     <group {...props} dispose={null}>
